@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { effectiveScore, formatDateTime } from "@/app/lib/format";
 import type { Post } from "@/app/lib/types";
 import { Button } from "./button";
@@ -68,9 +69,13 @@ export function PostsTable({
               className="align-top transition-colors hover:bg-ds-surface-hover/60"
             >
               <td className="min-w-0 px-4 py-3">
-                <p className="font-medium leading-5 text-ds-text">
+                <Link
+                  href={`/posts/${post.id}`}
+                  aria-label={`Abrir detalhes de ${post.title}`}
+                  className="font-medium leading-5 text-ds-text underline-offset-2 outline-none transition-colors hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ds-focus"
+                >
                   {post.title}
-                </p>
+                </Link>
                 <p className="mt-0.5 line-clamp-1 text-xs leading-4 text-ds-text-subtle">
                   {post.body}
                 </p>

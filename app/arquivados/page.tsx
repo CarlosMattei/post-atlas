@@ -17,14 +17,17 @@ import {
   inputClassName,
   selectClassName,
 } from "@/app/components/ui";
-import { posts } from "@/app/lib/data";
+import { getPosts } from "@/app/lib/queries";
 import { formatDateTime } from "@/app/lib/format";
+
+export const instant = false;
 
 export const metadata: Metadata = {
   title: "Arquivados · Post Atlas",
 };
 
-export default function ArchivedPage() {
+export default async function ArchivedPage() {
+  const posts = await getPosts();
   const archivedPosts = posts
     .filter((post) => post.status === "arquivado")
     .sort(

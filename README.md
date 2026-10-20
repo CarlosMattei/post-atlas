@@ -1,4 +1,7 @@
-# Post Atlas
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="public/postAtlas-logo-white.svg">
+  <img src="public/postAtlas._logoAndTypograpysvg.svg" alt="Post Atlas" width="360">
+</picture>
 
 Front-end de gestão para uma automação de publicações no LinkedIn, construído em Next.js com React Aria e design tokens baseados no Atlassian Design.
 
@@ -14,14 +17,15 @@ O projeto organiza rascunhos, aprovações, fila, agendamentos, arquivados, cone
 
 | Camada | Estado |
 |---|---|
-| Interface (este repositório) | Estrutura concluída, com dados mockados |
+| Interface (este repositório) | Telas navegáveis com integrações parciais ao Neon |
 | Automação n8n | Especificada no TDD v1.1, fora deste repositório |
-| Tabelas do PostgreSQL | Definidas no TDD v1.1 |
-| Integração front-end ↔ banco/API | Pendente |
+| Banco Neon/PostgreSQL | Schema em `neon-schema.sql`; posts, agenda e tendências consultados pelo app |
+| Integração front-end ↔ banco | Parcial: posts, calendário, dashboard e tendências |
 | Autenticação e sessão | Pendente |
-| CRUD real, upload de imagem e filtros dinâmicos | Pendente |
+| CRUD de posts | Criar, consultar, editar, alterar status e excluir |
+| Upload de imagem | Pendente; imagens locais ainda não são persistidas |
 
-> Esta versão entrega a estrutura navegável de todas as telas. Os dados exibidos vêm de `app/lib/data.ts` e não há chamadas reais a banco, webhooks ou APIs.
+> As telas conectadas usam o banco Neon. Outras telas e integrações ainda podem exibir conteúdo estático de `app/lib/data.ts`; n8n, LinkedIn, OpenRouter e Telegram não são chamados diretamente pelo app.
 
 ## Telas
 
@@ -29,8 +33,11 @@ O projeto organiza rascunhos, aprovações, fila, agendamentos, arquivados, cone
 |---|---|---|
 | `/` | Visão geral | Próxima publicação, fila, agendados, publicados, automação, atividade recente e temas em alta |
 | `/posts` | Posts | Busca, filtros, tabela com status, score, publicação e ações |
-| `/posts/novo` | Novo post | Editor, tags, imagem, estratégia de publicação, prévia do LinkedIn e checklist |
-| `/calendario` | Calendário | Visão semanal com rotina de dias úteis e posts com horário fixo |
+| `/posts/novo` | Novo post | Criação de rascunhos e posts aprovados/agendados no Neon |
+| `/posts/[id]` | Detalhes do post | Edição, status, agendamento e exclusão de posts no Neon |
+| `/calendario` | Calendário | Posts e rotina do Neon; arrastar e remover datas persiste o agendamento |
+| `/tendencias` | Tendências | Busca, filtro, score, status e data de coleta dos temas no Neon |
+| `/tendencias/[id]` | Detalhes da tendência | Fontes, score, métrica bruta, data e link original |
 | `/arquivados` | Arquivados | Conteúdos fora de circulação com ação de restauração |
 | `/conexao` | Conexão | Status de LinkedIn, n8n, OpenRouter, Telegram e PostgreSQL |
 | `/logs` | Logs | Histórico de execuções com filtros por workflow, resultado e período |
@@ -41,6 +48,10 @@ O projeto organiza rascunhos, aprovações, fila, agendamentos, arquivados, cone
 
 - Shell com sidebar, navegação por rotas e estado ativo.
 - Tema claro e escuro via `prefers-color-scheme`.
+- CRUD de posts conectado ao Neon, com validação no servidor e invalidação das rotas afetadas.
+- Calendário de posts conectado ao Neon, com persistência de reagendamentos no fuso da rotina.
+- Tendências consultadas do Neon, com busca, filtro por status e páginas de detalhes.
+- Dashboard com posts, agenda, logs recentes e tendências consultados no Neon.
 - Tabelas com status, score efetivo e datas formatadas em `America/Sao_Paulo`.
 - Lozenges de status, badges de resultado e indicadores de score.
 - Formulários com `label`, `fieldset/legend` e textos de apoio.
@@ -81,17 +92,17 @@ app/components/
   icons.tsx         # ícones SVG
 ```
 
-## Arquitetura prevista
+## Arquitetura
 
 ```text
 ┌──────────────────────────┐
 │ Front-end (Next.js)      │
 │ telas + componentes      │
 └────────────┬─────────────┘
-             │ acesso ainda pendente
+             │ PostgreSQL (pg)
              ▼
 ┌──────────────────────────┐        ┌──────────────────┐
-│ PostgreSQL (Umbrel OS)   │◄──────►│ n8n              │
+│ Neon (PostgreSQL)        │◄──────►│ n8n              │
 │ posts, schedule_config,  │  SQL   │ workflow único   │
 │ publish_logs, trend_items│        └───────┬──────────┘
 └──────────────────────────┘                │
@@ -100,11 +111,11 @@ app/components/
                             LinkedIn    OpenRouter    Telegram
 ```
 
-O front-end ainda não acessa o PostgreSQL diretamente. As opções em avaliação são webhooks autenticados do n8n, API própria ou PostgREST na rede local.
+As consultas e mutações ao Neon são executadas no servidor pela biblioteca `pg`. As credenciais não devem ser expostas ao navegador.
 
 ## Modelo de dados
 
-Definido no TDD v1.1 e reproduzido nos mocks:
+Definido em `neon-schema.sql`:
 
 | Tabela | Responsabilidade |
 |---|---|
@@ -135,8 +146,12 @@ post-atlas/
 │  ├─ globals.css
 │  ├─ posts/
 │  │  ├─ page.tsx
-│  │  └─ novo/page.tsx
+│  │  ├─ novo/page.tsx
+│  │  └─ [id]/page.tsx
 │  ├─ calendario/page.tsx
+│  ├─ tendencias/
+│  │  ├─ page.tsx
+│  │  └─ [id]/page.tsx
 │  ├─ arquivados/page.tsx
 │  ├─ conexao/page.tsx
 │  ├─ logs/page.tsx
@@ -152,9 +167,13 @@ post-atlas/
 │  └─ lib/
 │     ├─ cx.ts
 │     ├─ data.ts
+│     ├─ db.ts
 │     ├─ format.ts
+│     ├─ post-actions.ts
+│     ├─ queries.ts
 │     └─ types.ts
 ├─ public/
+├─ neon-schema.sql
 ├─ next.config.ts
 ├─ package.json
 └─ tsconfig.json
@@ -166,6 +185,7 @@ post-atlas/
 
 - Node.js 20.9 ou superior
 - npm
+- Banco Neon com o schema aplicado
 
 ### Instalação
 
@@ -182,6 +202,14 @@ npm run dev
 ```
 
 Acesse [http://localhost:3000](http://localhost:3000).
+
+Configure `NEON_CONNECTION_STRING` no `.env.local` com a URL de conexão PostgreSQL do Neon:
+
+```env
+NEON_CONNECTION_STRING=postgresql://usuario:senha@host/neondb?sslmode=require
+```
+
+Não versione credenciais. O arquivo `.env.local` deve permanecer fora do Git.
 
 ### Build de produção
 
@@ -204,10 +232,12 @@ npm run lint
 | `npm run build` | Build de produção |
 | `npm run start` | Servidor de produção |
 | `npm run lint` | Análise estática com ESLint |
+| `npm test` | Testes unitários de regras do formulário |
 
 ## Segurança
 
 - Não versione tokens do LinkedIn, chaves do OpenRouter, tokens do Telegram ou credenciais do PostgreSQL.
+- `NEON_CONNECTION_STRING` é lida somente no servidor e deve ser mantida em variável de ambiente privada.
 - O webhook de score ainda não valida `X-Webhook-Secret`; restrinja o acesso pela rede local ou Tailscale até implementar a validação.
 - Prefira credenciais nativas do n8n em vez de segredos escritos nos nós HTTP.
 - O token do LinkedIn expira em aproximadamente 60 dias e precisa de reautorização.
@@ -216,13 +246,14 @@ npm run lint
 ## Roadmap
 
 - [x] Shell, sidebar e design tokens
-- [x] Estrutura das nove telas
-- [x] Dados mockados fiéis ao modelo do TDD
+- [x] Estrutura das telas principais
+- [x] Schema PostgreSQL/Neon
+- [x] CRUD de posts sem upload de imagens
+- [x] Dashboard, calendário e tendências conectados ao Neon
 - [x] Componentes acessíveis com layout adaptável
 - [ ] Definir autenticação e proteção de rotas
-- [ ] Definir acesso do front-end ao PostgreSQL
-- [ ] Implementar CRUD de posts e upload de imagem
-- [ ] Ligar busca, filtros e paginação aos dados reais
+- [ ] Configurar upload persistente de imagens
+- [ ] Conectar os filtros de posts/logs e as demais telas ao banco
 - [ ] Implementar `X-Webhook-Secret` no webhook de score
 - [ ] Adicionar testes de componentes e fluxos críticos
 

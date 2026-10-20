@@ -1,6 +1,7 @@
 export type PostStatus =
   | "rascunho"
   | "aprovado"
+  | "reprovado"
   | "agendado"
   | "publicando"
   | "publicado"
@@ -16,11 +17,18 @@ export type Workflow =
   | "alerta"
   | "score";
 
+export type PostImage = {
+  id: string;
+  url: string;
+  alt: string;
+};
+
 export type Post = {
   id: string;
   title: string;
   body: string;
   tags: string[];
+  images?: PostImage[];
   status: PostStatus;
   aiScore: number | null;
   scoreOverride: number | null;
@@ -53,6 +61,13 @@ export type TrendItem = {
   score: number;
   status: TrendStatus;
   collectedOn: string;
+};
+
+export type TrendItemDetails = TrendItem & {
+  url: string | null;
+  rawMetric: number;
+  dedupeKey: string;
+  collectedAt: string;
 };
 
 export type IntegrationStatus = "conectado" | "atencao" | "desconectado";

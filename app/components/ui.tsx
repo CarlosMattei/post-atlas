@@ -31,6 +31,7 @@ const toneClasses: Record<Tone, string> = {
 const statusTones: Record<PostStatus, Tone> = {
   rascunho: "neutral",
   aprovado: "info",
+  reprovado: "danger",
   agendado: "discovery",
   publicando: "warning",
   publicado: "success",

@@ -17,13 +17,16 @@ import {
   inputClassName,
   selectClassName,
 } from "@/app/components/ui";
-import { posts } from "@/app/lib/data";
+import { getPosts } from "@/app/lib/queries";
+
+export const instant = false;
 
 export const metadata: Metadata = {
   title: "Posts · Post Atlas",
 };
 
-export default function PostsPage() {
+export default async function PostsPage() {
+  const posts = await getPosts();
   const orderedPosts = [...posts].sort(
     (a, b) =>
       new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
@@ -66,6 +69,7 @@ export default function PostsPage() {
               <option value="todos">Todos os status</option>
               <option value="rascunho">Rascunho</option>
               <option value="aprovado">Aprovado</option>
+              <option value="reprovado">Reprovado</option>
               <option value="agendado">Agendado</option>
               <option value="publicando">Publicando</option>
               <option value="publicado">Publicado</option>

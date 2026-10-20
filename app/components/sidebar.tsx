@@ -12,6 +12,7 @@ import {
   LogsIcon,
   PostsIcon,
   SettingsIcon,
+  TrendingUpIcon,
 } from "./icons";
 
 type NavItem = {
@@ -24,6 +25,7 @@ const primaryItems: NavItem[] = [
   { href: "/", label: "Home", icon: HomeIcon },
   { href: "/posts", label: "Posts", icon: PostsIcon },
   { href: "/calendario", label: "Calendário", icon: CalendarIcon },
+  { href: "/tendencias", label: "Tendências", icon: TrendingUpIcon },
   { href: "/arquivados", label: "Arquivados", icon: ArchiveIcon },
   { href: "/conexao", label: "Conexão", icon: ConnectionIcon },
   { href: "/logs", label: "Logs", icon: LogsIcon },
@@ -73,21 +75,14 @@ function NavListItem({ item }: { item: NavItem }) {
 export function Sidebar() {
   return (
     <aside className="sticky top-0 flex h-screen w-16 shrink-0 flex-col border-r border-ds-line bg-ds-surface md:w-60">
-      <div className="flex h-14 shrink-0 items-center justify-center gap-3 px-4 md:justify-start">
+      <div className="flex h-24 shrink-0 items-center justify-center gap-3 px-4 md:justify-start">
         <span
           aria-hidden="true"
-          className="flex size-7 shrink-0 items-center justify-center rounded-ds bg-ds-brand text-[13px] font-bold text-white"
-        >
-          A
-        </span>
-        <span className="hidden min-w-0 flex-col md:flex">
-          <span className="truncate text-sm font-semibold leading-5 text-ds-text">
-            Post Atlas
-          </span>
-          <span className="truncate text-[11px] leading-4 text-ds-text-subtle">
-            Espaço de trabalho
-          </span>
-        </span>
+          className="h-10 w-full shrink-0 bg-ds-brand"
+          style={{
+            mask: "url('/postAtlas._logoAndTypograpysvg.svg') center / contain no-repeat",
+          }}
+        />
       </div>
 
       <nav

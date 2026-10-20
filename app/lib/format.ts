@@ -67,6 +67,7 @@ export function effectiveScore(post: Post): number {
 export const statusLabels: Record<PostStatus, string> = {
   rascunho: "Rascunho",
   aprovado: "Aprovado",
+  reprovado: "Reprovado",
   agendado: "Agendado",
   publicando: "Publicando",
   publicado: "Publicado",

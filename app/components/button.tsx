@@ -5,7 +5,13 @@ import { Button as RACButton, type ButtonProps } from "react-aria-components/But
 import { Link, type LinkProps } from "react-aria-components/Link";
 import { cx } from "@/app/lib/cx";
 
-type Variant = "primary" | "standard" | "subtle" | "danger" | "outline";
+type Variant =
+  | "primary"
+  | "standard"
+  | "subtle"
+  | "subtle-danger"
+  | "danger"
+  | "outline";
 type Size = "sm" | "md" | "icon" | "icon-sm";
 
 const variantClasses: Record<Variant, string> = {
@@ -15,6 +21,8 @@ const variantClasses: Record<Variant, string> = {
     "bg-ds-neutral text-ds-text data-[hovered]:bg-ds-neutral-hover data-[pressed]:bg-ds-neutral-hover",
   subtle:
     "bg-transparent text-ds-text-subtle data-[hovered]:bg-ds-surface-hover data-[hovered]:text-ds-text data-[pressed]:bg-ds-surface-hover",
+  "subtle-danger":
+    "bg-transparent text-ds-danger-text data-[hovered]:bg-ds-danger-bg data-[pressed]:bg-ds-danger-bg",
   danger:
     "bg-ds-danger text-ds-on-danger data-[hovered]:bg-ds-danger-hover data-[pressed]:bg-ds-danger-hover",
   outline:

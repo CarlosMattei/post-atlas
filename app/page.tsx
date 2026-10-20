@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ButtonLink } from "@/app/components/button";
 import {
   ArrowUpRightIcon,
@@ -28,16 +29,13 @@ import {
   StatusBadge,
 } from "@/app/components/ui";
 import {
-  posts,
-  publishLogs,
-  queue,
-  scheduleConfig,
-  trendItems,
   weekdayLabels,
 } from "@/app/lib/data";
+import { getHomeDashboardData } from "@/app/lib/queries";
 import {
   effectiveScore,
   formatDay,
+  formatDateTime,
   formatMonthShort,
   formatTime,
   formatWeekdayDate,
@@ -49,7 +47,28 @@ export const metadata: Metadata = {
   title: "Visão geral · Post Atlas",
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { posts, publishLogs, scheduleConfig, trendItems, newTrendCount } =
+    await getHomeDashboardData();
+  const queue = posts
+    .filter(
+      (post) =>
+        post.status === "aprovado" &&
+        post.scheduledAt === null &&
+        post.linkedinPostId === null,
+    )
+    .sort((a, b) => {
+      if (a.manualOrder !== null || b.manualOrder !== null) {
+        return (
+          (a.manualOrder ?? Number.MAX_SAFE_INTEGER) -
+          (b.manualOrder ?? Number.MAX_SAFE_INTEGER)
+        );
+      }
+      const scoreDiff = effectiveScore(b) - effectiveScore(a);
+      return scoreDiff !== 0
+        ? scoreDiff
+        : new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+    });
   const scheduled = posts
     .filter(
       (post) =>
@@ -61,9 +80,10 @@ export default function HomePage() {
         new Date(a.scheduledAt!).getTime() - new Date(b.scheduledAt!).getTime(),
     );
 
+  const month = new Date().toISOString().slice(0, 7);
   const publishedThisMonth = posts.filter((post) =>
-    post.publishedAt?.startsWith("2026-10"),
-  ).length;
+    post.publishedAt?.startsWith(month),
+  );
 
   const upcoming = [
     ...scheduled.map((post) => ({
@@ -79,8 +99,18 @@ export default function HomePage() {
   ];
 
   const nextRun = scheduled[0]?.scheduledAt ?? null;
-  const recentLogs = publishLogs.slice(0, 5);
-  const highlightedTrends = trendItems.slice(0, 4);
+  const recentLogs = publishLogs;
+  const highlightedTrends = trendItems;
+  const activeWeekdays = scheduleConfig.publishWeekdays
+    .map((day) => weekdayLabels[day])
+    .join("–");
+  const latestPublished = posts
+    .filter((post) => post.publishedAt)
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt!).getTime() -
+        new Date(a.publishedAt!).getTime(),
+    )[0];
 
   return (
     <PageContainer>
@@ -101,19 +131,20 @@ export default function HomePage() {
         }
       />
 
-      <Alert
-        tone="warning"
-        title="O token do LinkedIn expira em 12 dias"
-        action={
-          <ButtonLink href="/conexao" variant="standard" size="sm">
-            Revisar conexão
-            <ArrowUpRightIcon className="size-3.5" />
-          </ButtonLink>
-        }
-      >
-        Reautorize antes de 31 de outubro para evitar falhas na publicação da
-        fila.
-      </Alert>
+      {scheduleConfig.paused ? (
+        <Alert
+          tone="warning"
+          title="Rotina de publicação pausada"
+          action={
+            <ButtonLink href="/configuracoes" variant="standard" size="sm">
+              Revisar rotina
+              <ArrowUpRightIcon className="size-3.5" />
+            </ButtonLink>
+          }
+        >
+          A automação está pausada nas configurações de agenda.
+        </Alert>
+      ) : null}
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
@@ -125,19 +156,23 @@ export default function HomePage() {
         <StatCard
           label="Na fila"
           value={`${queue.length} posts`}
-          hint="1 com prioridade manual"
+          hint={`${queue.filter((post) => post.manualOrder !== null).length} com prioridade manual`}
           icon={PostsIcon}
         />
         <StatCard
           label="Agendados"
           value={`${scheduled.length} posts`}
-          hint="Publicação por horário fixo"
+          hint={`${scheduled.filter((post) => post.status === "agendado").length} por horário fixo`}
           icon={CalendarIcon}
         />
         <StatCard
           label="Publicados no mês"
-          value={String(publishedThisMonth)}
-          hint="Última publicação hoje, 09:00"
+          value={String(publishedThisMonth.length)}
+          hint={
+            latestPublished?.publishedAt
+              ? `Última em ${formatDateTime(latestPublished.publishedAt)}`
+              : "Nenhuma publicação ainda"
+          }
           icon={CheckCircleIcon}
         />
       </div>
@@ -211,7 +246,11 @@ export default function HomePage() {
           <CardHeader
             title="Automação"
             description="Rotina de publicação no fuso de São Paulo."
-            action={<Badge tone="success">Ativa</Badge>}
+            action={
+              <Badge tone={scheduleConfig.paused ? "warning" : "success"}>
+                {scheduleConfig.paused ? "Pausada" : "Ativa"}
+              </Badge>
+            }
           />
           <CardBody className="flex-1">
             <div className="rounded-ds-lg bg-ds-surface-hover px-3 py-3">
@@ -232,7 +271,7 @@ export default function HomePage() {
               <div className="flex items-center justify-between gap-3 py-2">
                 <dt className="text-ds-text-subtle">Rotina</dt>
                 <dd className="font-medium text-ds-text">
-                  {scheduleConfig.publishTime} · Seg–Sex
+                  {scheduleConfig.publishTime} · {activeWeekdays}
                 </dd>
               </div>
               <div className="flex items-center justify-between gap-3 py-2">
@@ -320,27 +359,41 @@ export default function HomePage() {
           <CardHeader
             title="Temas em alta"
             description="Coletados hoje pela busca de conteúdo."
-            action={<Badge tone="discovery">12 novos</Badge>}
+            action={
+              <div className="flex items-center gap-2">
+                <Badge tone="discovery">{newTrendCount} novos</Badge>
+                <ButtonLink href="/tendencias" variant="subtle" size="sm">
+                  Ver todos
+                  <ArrowUpRightIcon className="size-3.5" />
+                </ButtonLink>
+              </div>
+            }
           />
           <ul className="divide-y divide-ds-line">
             {highlightedTrends.map((trend) => (
-              <li key={trend.id} className="px-4 py-2.5">
-                <div className="flex items-start justify-between gap-3">
-                  <p className="line-clamp-2 text-xs font-medium leading-4 text-ds-text">
-                    {trend.title}
-                  </p>
-                  <span className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-ds-discovery-text tabular-nums">
-                    <SparklesIcon className="size-3.5" />
-                    {trend.score}
-                  </span>
-                </div>
-                <div className="mt-1 flex items-center justify-between gap-2 text-[11px] text-ds-text-subtle">
-                  <span className="truncate">{trend.sources.join(" · ")}</span>
-                  <span className="inline-flex items-center gap-1">
-                    <TrendingUpIcon className="size-3" />
-                    {trend.status === "novo" ? "Novo" : "Usado"}
-                  </span>
-                </div>
+              <li key={trend.id}>
+                <Link
+                  href={`/tendencias/${trend.id}`}
+                  aria-label={`Ver detalhes da tendência: ${trend.title}`}
+                  className="block px-4 py-2.5 no-underline outline-none transition-colors hover:bg-ds-surface-hover/60 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-ds-focus"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <p className="line-clamp-2 text-xs font-medium leading-4 text-ds-text">
+                      {trend.title}
+                    </p>
+                    <span className="inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-ds-discovery-text tabular-nums">
+                      <SparklesIcon className="size-3.5" />
+                      {trend.score}
+                    </span>
+                  </div>
+                  <div className="mt-1 flex items-center justify-between gap-2 text-[11px] text-ds-text-subtle">
+                    <span className="truncate">{trend.sources.join(" · ")}</span>
+                    <span className="inline-flex items-center gap-1">
+                      <TrendingUpIcon className="size-3" />
+                      {trend.status === "novo" ? "Novo" : "Usado"}
+                    </span>
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>

@@ -26,6 +26,7 @@ import {
   inputClassName,
   labelClassName,
 } from "@/app/components/ui";
+import { createPost } from "@/app/lib/post-actions";
 
 export const metadata: Metadata = {
   title: "Novo post · Post Atlas",
@@ -50,6 +51,7 @@ export default function NewPostPage() {
         de posts. Posts aprovados entram na fila ou no horário fixo.
       </Alert>
 
+      <form action={createPost}>
       <div className="mt-4 grid gap-4 lg:grid-cols-3">
         <div className="flex flex-col gap-4 lg:col-span-2">
           <Card>
@@ -70,7 +72,9 @@ export default function NewPostPage() {
                 <input
                   id="post-title"
                   type="text"
+                  name="title"
                   maxLength={200}
+                  required
                   placeholder="Ex.: Como estruturei meu segundo cérebro no Obsidian"
                   className={inputClassName}
                 />
@@ -91,7 +95,9 @@ export default function NewPostPage() {
                 <textarea
                   id="post-body"
                   rows={10}
+                  name="body"
                   maxLength={3000}
+                  required
                   placeholder="Comece com o gancho das primeiras linhas. Depois desenvolva o argumento e feche com uma chamada para ação."
                   className={`${inputClassName} h-auto min-h-48 resize-y py-2 leading-6`}
                 />
@@ -110,6 +116,7 @@ export default function NewPostPage() {
                   <input
                     id="post-tags"
                     type="text"
+                    name="tags"
                     placeholder="produtividade, obsidian, pkm"
                     className={`${inputClassName} pl-8`}
                   />
@@ -165,6 +172,7 @@ export default function NewPostPage() {
                     <input
                       type="radio"
                       name="publish-strategy"
+                      value="fila"
                       defaultChecked
                       className="mt-0.5 size-4 accent-[var(--ds-brand)]"
                     />
@@ -184,6 +192,7 @@ export default function NewPostPage() {
                     <input
                       type="radio"
                       name="publish-strategy"
+                      value="fixo"
                       className="mt-0.5 size-4 accent-[var(--ds-brand)]"
                     />
                     <span className="min-w-0">
@@ -207,6 +216,7 @@ export default function NewPostPage() {
                 <input
                   id="scheduled-at"
                   type="datetime-local"
+                  name="scheduledAt"
                   className={inputClassName}
                 />
                 <p className="mt-1 text-xs leading-4 text-ds-text-subtle">
@@ -349,13 +359,26 @@ export default function NewPostPage() {
           <ButtonLink href="/posts" variant="subtle">
             Cancelar
           </ButtonLink>
-          <Button variant="outline">Salvar rascunho</Button>
-          <Button variant="primary">
+          <button
+            type="submit"
+            name="status"
+            value="rascunho"
+            className="inline-flex h-8 cursor-pointer items-center justify-center rounded-ds border border-ds-line bg-ds-surface px-3 text-sm font-medium text-ds-text transition-colors hover:bg-ds-surface-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ds-focus"
+          >
+            Salvar rascunho
+          </button>
+          <button
+            type="submit"
+            name="status"
+            value="aprovado"
+            className="inline-flex h-8 cursor-pointer items-center justify-center gap-2 rounded-ds bg-ds-brand px-3 text-sm font-medium text-ds-on-brand transition-colors hover:bg-ds-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ds-focus"
+          >
             <SendIcon className="size-4" />
             Aprovar post
-          </Button>
+          </button>
         </div>
       </Card>
+      </form>
     </PageContainer>
   );
 }
