@@ -1,0 +1,107 @@
+- generic [active] [ref=f9e1]:
+  - link "Pular para o conteúdo" [ref=f9e2] [cursor=pointer]:
+    - /url: "#conteudo"
+  - generic [ref=f9e3]:
+    - complementary [ref=f9e4]:
+      - generic [ref=f9e5]:
+        - generic [aria-hidden] [ref=f9e6]: A
+        - generic [ref=f9e7]:
+          - generic [ref=f9e8]: Post Atlas
+          - generic [ref=f9e9]: Espaço de trabalho
+      - navigation "Navegação principal" [ref=f9e10]:
+        - list [ref=f9e11]:
+          - listitem [ref=f9e12]:
+            - link "Home" [ref=f9e13] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f9e19]:
+            - link "Posts" [ref=f9e20] [cursor=pointer]:
+              - /url: /posts
+          - listitem [ref=f9e26]:
+            - link "Calendário" [ref=f9e27] [cursor=pointer]:
+              - /url: /calendario
+          - listitem [ref=f9e32]:
+            - link "Arquivados" [ref=f9e33] [cursor=pointer]:
+              - /url: /arquivados
+          - listitem [ref=f9e38]:
+            - link "Conexão" [ref=f9e39] [cursor=pointer]:
+              - /url: /conexao
+          - listitem [ref=f9e44]:
+            - link "Logs" [ref=f9e45] [cursor=pointer]:
+              - /url: /logs
+          - listitem [ref=f9e50]:
+            - link "Configurações" [ref=f9e51] [cursor=pointer]:
+              - /url: /configuracoes
+        - list [ref=f9e56]:
+          - listitem [ref=f9e57]:
+            - link "Sair" [ref=f9e58] [cursor=pointer]:
+              - /url: /sair
+    - main [ref=f9e63]:
+      - generic [ref=f9e64]:
+        - generic [ref=f9e65]:
+          - generic [ref=f9e66]:
+            - heading "Arquivados" [level=1] [ref=f9e67]
+            - paragraph [ref=f9e68]: Conteúdos fora de circulação que ainda podem voltar como rascunho.
+          - generic [ref=f9e69]:
+            - button "Exportar" [ref=f9e70] [cursor=pointer]
+            - link "Voltar para posts" [ref=f9e73] [cursor=pointer]:
+              - /url: /posts
+        - generic [ref=f9e74]:
+          - generic [ref=f9e80]:
+            - paragraph [ref=f9e81]: 2 posts arquivados
+            - paragraph [ref=f9e82]: Último arquivamento em 10 out · 06:30
+          - link "Ver posts ativos" [ref=f9e83] [cursor=pointer]:
+            - /url: /posts
+        - generic [ref=f9e86]:
+          - generic [ref=f9e87]:
+            - generic [ref=f9e88]:
+              - generic [ref=f9e89]: Buscar posts arquivados
+              - searchbox "Buscar posts arquivados" [ref=f9e90]
+            - generic [ref=f9e91]:
+              - generic [ref=f9e92]: Ordenar arquivados
+              - combobox "Ordenar arquivados" [ref=f9e93]:
+                - option "Arquivados recentemente" [selected]
+                - option "Mais antigos primeiro"
+                - option "Maior score"
+            - generic [ref=f9e94]: Restauração disponível
+          - table [ref=f9e96]:
+            - rowgroup [ref=f9e97]:
+              - row [ref=f9e98]:
+                - columnheader "Post" [ref=f9e99]
+                - columnheader "Score" [ref=f9e100]
+                - columnheader "Arquivado em" [ref=f9e101]
+                - columnheader "Atualizado" [ref=f9e102]
+                - columnheader "Ações" [ref=f9e103]
+            - rowgroup [ref=f9e105]:
+              - row [ref=f9e106]:
+                - cell "Rotina de leitura para quem trabalha o dia inteiro Não é sobre ler mais rápido. É sobre criar atrito zero para abrir o livro certo na hora certa. leitura rotina" [ref=f9e107]:
+                  - paragraph [ref=f9e108]: Rotina de leitura para quem trabalha o dia inteiro
+                  - paragraph [ref=f9e109]: Não é sobre ler mais rápido. É sobre criar atrito zero para abrir o livro certo na hora certa.
+                  - generic [ref=f9e110]:
+                    - generic [ref=f9e111]: leitura
+                    - generic [ref=f9e112]: rotina
+                - cell [ref=f9e113]:
+                  - generic "Score 68 de 100" [ref=f9e114]: "68"
+                - cell "10 out · 06:30" [ref=f9e118]
+                - cell "10 out · 06:30" [ref=f9e119]
+                - cell [ref=f9e120]:
+                  - button "Restaurar Rotina de leitura para quem trabalha o dia inteiro" [ref=f9e121] [cursor=pointer]: Restaurar
+              - row [ref=f9e125]:
+                - 'cell "Postmortem: quando o workflow falhou no melhor momento Um detalhe de autenticação derrubou a publicação justamente na semana de maior audiência. O que eu mudei depois disso. n8n postmortem" [ref=f9e126]':
+                  - paragraph [ref=f9e127]: "Postmortem: quando o workflow falhou no melhor momento"
+                  - paragraph [ref=f9e128]: Um detalhe de autenticação derrubou a publicação justamente na semana de maior audiência. O que eu mudei depois disso.
+                  - generic [ref=f9e129]:
+                    - generic [ref=f9e130]: n8n
+                    - generic [ref=f9e131]: postmortem
+                - cell [ref=f9e132]:
+                  - generic "Score 55 de 100" [ref=f9e133]: "55"
+                - cell "04 out · 15:20" [ref=f9e137]
+                - cell "04 out · 15:20" [ref=f9e138]
+                - cell [ref=f9e139]:
+                  - 'button "Restaurar Postmortem: quando o workflow falhou no melhor momento" [ref=f9e140] [cursor=pointer]': Restaurar
+          - generic [ref=f9e144]:
+            - paragraph [ref=f9e145]: Posts publicados são imutáveis. O arquivamento vale até a publicação.
+            - generic [ref=f9e146]:
+              - button "Página anterior" [disabled] [ref=f9e147]
+              - generic [ref=f9e150]: 1 de 1
+              - button "Próxima página" [disabled] [ref=f9e151]
+  - button "Open Next.js Dev Tools" [ref=f9e159] [cursor=pointer]

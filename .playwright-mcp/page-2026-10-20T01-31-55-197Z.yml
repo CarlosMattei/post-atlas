@@ -1,0 +1,178 @@
+- generic [active] [ref=f8e1]:
+  - link "Pular para o conteúdo" [ref=f8e2] [cursor=pointer]:
+    - /url: "#conteudo"
+  - generic [ref=f8e3]:
+    - complementary [ref=f8e4]:
+      - generic [ref=f8e5]:
+        - generic [aria-hidden] [ref=f8e6]: A
+        - generic [ref=f8e7]:
+          - generic [ref=f8e8]: Post Atlas
+          - generic [ref=f8e9]: Espaço de trabalho
+      - navigation "Navegação principal" [ref=f8e10]:
+        - list [ref=f8e11]:
+          - listitem [ref=f8e12]:
+            - link "Home" [ref=f8e13] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f8e19]:
+            - link "Posts" [ref=f8e20] [cursor=pointer]:
+              - /url: /posts
+          - listitem [ref=f8e26]:
+            - link "Calendário" [ref=f8e27] [cursor=pointer]:
+              - /url: /calendario
+          - listitem [ref=f8e32]:
+            - link "Arquivados" [ref=f8e33] [cursor=pointer]:
+              - /url: /arquivados
+          - listitem [ref=f8e38]:
+            - link "Conexão" [ref=f8e39] [cursor=pointer]:
+              - /url: /conexao
+          - listitem [ref=f8e44]:
+            - link "Logs" [ref=f8e45] [cursor=pointer]:
+              - /url: /logs
+          - listitem [ref=f8e50]:
+            - link "Configurações" [ref=f8e51] [cursor=pointer]:
+              - /url: /configuracoes
+        - list [ref=f8e56]:
+          - listitem [ref=f8e57]:
+            - link "Sair" [ref=f8e58] [cursor=pointer]:
+              - /url: /sair
+    - main [ref=f8e63]:
+      - generic [ref=f8e64]:
+        - generic [ref=f8e65]:
+          - generic [ref=f8e66]:
+            - heading "Calendário" [level=1] [ref=f8e67]
+            - paragraph [ref=f8e68]: Alterne entre a rotina de dias úteis e os posts com data e hora fixas.
+          - generic [ref=f8e69]:
+            - link "Configurar rotina" [ref=f8e70] [cursor=pointer]:
+              - /url: /configuracoes
+            - link "Novo post" [ref=f8e74] [cursor=pointer]:
+              - /url: /posts/novo
+        - generic [ref=f8e77]:
+          - generic [ref=f8e78]:
+            - generic [ref=f8e79]:
+              - button "Semana anterior" [ref=f8e80] [cursor=pointer]
+              - heading "19 – 25 de outubro de 2026" [level=2] [ref=f8e83]
+              - button "Próxima semana" [ref=f8e84] [cursor=pointer]
+              - button "Hoje" [ref=f8e87] [cursor=pointer]
+            - generic [ref=f8e88]:
+              - generic [ref=f8e89]: Horário fixo
+              - generic [ref=f8e91]: Rotina da fila
+              - generic [ref=f8e93]: Publicado
+          - generic [ref=f8e96]:
+            - generic [ref=f8e97]:
+              - generic [ref=f8e98]:
+                - generic [ref=f8e99]: Seg
+                - generic [ref=f8e100]: "19"
+              - generic [ref=f8e102]:
+                - paragraph [ref=f8e103]: 09:00 · Rotina
+                - paragraph [ref=f8e104]: 3 posts na fila
+            - generic [ref=f8e105]:
+              - generic [ref=f8e106]:
+                - generic [ref=f8e107]: Ter
+                - generic [ref=f8e108]: "20"
+              - generic [ref=f8e109]:
+                - generic [ref=f8e110]:
+                  - paragraph [ref=f8e111]: 09:00 · Rotina
+                  - paragraph [ref=f8e112]: 3 posts na fila
+                - generic [ref=f8e113]:
+                  - paragraph [ref=f8e114]: 09:00 · Fixo
+                  - paragraph [ref=f8e115]: 3 aprendizados ao automatizar publicações com n8n
+                  - generic [ref=f8e116]:
+                    - generic "Score 95 de 100" [ref=f8e117]: "95"
+                    - generic [ref=f8e121]: n8n
+            - generic [ref=f8e122]:
+              - generic [ref=f8e123]:
+                - generic [ref=f8e124]: Qua
+                - generic [ref=f8e125]: "21"
+              - generic [ref=f8e127]:
+                - paragraph [ref=f8e128]: 09:00 · Rotina
+                - paragraph [ref=f8e129]: 3 posts na fila
+            - generic [ref=f8e130]:
+              - generic [ref=f8e131]:
+                - generic [ref=f8e132]: Qui
+                - generic [ref=f8e133]: "22"
+              - generic [ref=f8e134]:
+                - generic [ref=f8e135]:
+                  - paragraph [ref=f8e136]: 09:00 · Rotina
+                  - paragraph [ref=f8e137]: 3 posts na fila
+                - generic [ref=f8e138]:
+                  - paragraph [ref=f8e139]: 09:00 · Fixo
+                  - paragraph [ref=f8e140]: "Mapa mental: do caos à pauta"
+                  - generic [ref=f8e141]:
+                    - generic "Score 81 de 100" [ref=f8e142]: "81"
+                    - generic [ref=f8e146]: pauta
+            - generic [ref=f8e147]:
+              - generic [ref=f8e148]:
+                - generic [ref=f8e149]: Sex
+                - generic [ref=f8e150]: "23"
+              - generic [ref=f8e152]:
+                - paragraph [ref=f8e153]: 09:00 · Rotina
+                - paragraph [ref=f8e154]: 3 posts na fila
+            - generic [ref=f8e155]:
+              - generic [ref=f8e156]:
+                - generic [ref=f8e157]: Sáb
+                - generic [ref=f8e158]: "24"
+              - paragraph [ref=f8e160]: Fora da rotinade publicação
+            - generic [ref=f8e161]:
+              - generic [ref=f8e162]:
+                - generic [ref=f8e163]: Dom
+                - generic [ref=f8e164]: "25"
+              - paragraph [ref=f8e166]: Fora da rotinade publicação
+          - generic [ref=f8e167]:
+            - paragraph [ref=f8e168]: Horários em America/Sao_Paulo. Posts fixos são verificados a cada 5 minutos.
+            - generic [ref=f8e169]: Automação ativa
+        - generic [ref=f8e170]:
+          - generic [ref=f8e171]:
+            - generic [ref=f8e172]:
+              - generic [ref=f8e173]:
+                - heading "Agendamentos fixos" [level=2] [ref=f8e174]
+                - paragraph [ref=f8e175]: Posts que ignoram a ordem da fila e saem no horário definido.
+              - link "Ver todos" [ref=f8e177] [cursor=pointer]:
+                - /url: /posts
+            - list [ref=f8e180]:
+              - listitem [ref=f8e181]:
+                - generic [ref=f8e182]:
+                  - generic [ref=f8e183]: "20"
+                  - generic [ref=f8e184]: out
+                - generic [ref=f8e185]:
+                  - paragraph [ref=f8e186]: 3 aprendizados ao automatizar publicações com n8n
+                  - paragraph [ref=f8e187]: 09:00 · ter · horário fixo
+                - generic "Score 95 de 100" [ref=f8e188]: "95"
+                - generic [ref=f8e192]: Agendado
+                - button "Reagendar" [ref=f8e193] [cursor=pointer]
+              - listitem [ref=f8e194]:
+                - generic [ref=f8e195]:
+                  - generic [ref=f8e196]: "22"
+                  - generic [ref=f8e197]: out
+                - generic [ref=f8e198]:
+                  - paragraph [ref=f8e199]: "Mapa mental: do caos à pauta"
+                  - paragraph [ref=f8e200]: 09:00 · qui · horário fixo
+                - generic "Score 81 de 100" [ref=f8e201]: "81"
+                - generic [ref=f8e205]: Agendado
+                - button "Reagendar" [ref=f8e206] [cursor=pointer]
+          - generic [ref=f8e207]:
+            - generic [ref=f8e208]:
+              - generic [ref=f8e209]:
+                - heading "Rotina de publicação" [level=2] [ref=f8e210]
+                - paragraph [ref=f8e211]: Definida em Configurações.
+              - generic [ref=f8e212]: Ativa
+            - generic [ref=f8e214]:
+              - paragraph [ref=f8e215]: 09:00
+              - paragraph [ref=f8e216]: America/Sao_Paulo
+              - generic [ref=f8e217]:
+                - generic [ref=f8e218]: Seg
+                - generic [ref=f8e219]: Ter
+                - generic [ref=f8e220]: Qua
+                - generic [ref=f8e221]: Qui
+                - generic [ref=f8e222]: Sex
+                - generic [ref=f8e223]: Sáb
+                - generic [ref=f8e224]: Dom
+              - generic [ref=f8e225]:
+                - generic [ref=f8e226]:
+                  - term [ref=f8e227]: Próximo ciclo
+                  - definition [ref=f8e228]: Ter, 20 out · 09:00
+                - generic [ref=f8e229]:
+                  - term [ref=f8e230]: Alerta de fila
+                  - definition [ref=f8e231]: < 3 posts
+            - link "Editar rotina" [ref=f8e233] [cursor=pointer]:
+              - /url: /configuracoes
+  - button "Open Next.js Dev Tools" [ref=f8e241] [cursor=pointer]

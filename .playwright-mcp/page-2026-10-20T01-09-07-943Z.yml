@@ -1,0 +1,40 @@
+- generic [active] [ref=e1]:
+  - link "Pular para o conteúdo" [ref=e2] [cursor=pointer]:
+    - /url: "#conteudo"
+  - generic [ref=e3]:
+    - complementary [ref=e4]:
+      - generic [ref=e5]:
+        - generic [aria-hidden] [ref=e6]: A
+        - generic [ref=e7]:
+          - generic [ref=e8]: Post Atlas
+          - generic [ref=e9]: Espaço de trabalho
+      - navigation "Navegação principal" [ref=e10]:
+        - list [ref=e11]:
+          - listitem [ref=e12]:
+            - link "Home" [ref=e13] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e19]:
+            - link "Posts" [ref=e20] [cursor=pointer]:
+              - /url: /posts
+          - listitem [ref=e26]:
+            - link "Calendário" [ref=e27] [cursor=pointer]:
+              - /url: /calendario
+          - listitem [ref=e32]:
+            - link "Arquivados" [ref=e33] [cursor=pointer]:
+              - /url: /arquivados
+          - listitem [ref=e38]:
+            - link "Conexão" [ref=e39] [cursor=pointer]:
+              - /url: /conexao
+          - listitem [ref=e44]:
+            - link "Logs" [ref=e45] [cursor=pointer]:
+              - /url: /logs
+          - listitem [ref=e50]:
+            - link "Configurações" [ref=e51] [cursor=pointer]:
+              - /url: /configuracoes
+        - list [ref=e56]:
+          - listitem [ref=e57]:
+            - link "Sair" [ref=e58] [cursor=pointer]:
+              - /url: /sair
+    - main [ref=e63]
+  - button "Open Next.js Dev Tools" [ref=e69] [cursor=pointer]
+  - alert [ref=e73]

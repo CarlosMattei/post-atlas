@@ -1,0 +1,229 @@
+- generic [active] [ref=f6e1]:
+  - link "Pular para o conteúdo" [ref=f6e2] [cursor=pointer]:
+    - /url: "#conteudo"
+  - generic [ref=f6e3]:
+    - complementary [ref=f6e4]:
+      - generic [ref=f6e5]:
+        - generic [aria-hidden] [ref=f6e6]: A
+        - generic [ref=f6e7]:
+          - generic [ref=f6e8]: Post Atlas
+          - generic [ref=f6e9]: Espaço de trabalho
+      - navigation "Navegação principal" [ref=f6e10]:
+        - list [ref=f6e11]:
+          - listitem [ref=f6e12]:
+            - link "Home" [ref=f6e13] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f6e19]:
+            - link "Posts" [ref=f6e20] [cursor=pointer]:
+              - /url: /posts
+          - listitem [ref=f6e26]:
+            - link "Calendário" [ref=f6e27] [cursor=pointer]:
+              - /url: /calendario
+          - listitem [ref=f6e32]:
+            - link "Arquivados" [ref=f6e33] [cursor=pointer]:
+              - /url: /arquivados
+          - listitem [ref=f6e38]:
+            - link "Conexão" [ref=f6e39] [cursor=pointer]:
+              - /url: /conexao
+          - listitem [ref=f6e44]:
+            - link "Logs" [ref=f6e45] [cursor=pointer]:
+              - /url: /logs
+          - listitem [ref=f6e50]:
+            - link "Configurações" [ref=f6e51] [cursor=pointer]:
+              - /url: /configuracoes
+        - list [ref=f6e56]:
+          - listitem [ref=f6e57]:
+            - link "Sair" [ref=f6e58] [cursor=pointer]:
+              - /url: /sair
+    - main [ref=f6e63]:
+      - generic [ref=f6e64]:
+        - generic [ref=f6e65]:
+          - generic [ref=f6e66]:
+            - heading "Visão geral" [level=1] [ref=f6e67]
+            - paragraph [ref=f6e68]: Acompanhe a fila, as próximas publicações e a saúde da automação.
+          - generic [ref=f6e69]:
+            - link "Ajustar rotina" [ref=f6e70] [cursor=pointer]:
+              - /url: /configuracoes
+            - link "Novo post" [ref=f6e73] [cursor=pointer]:
+              - /url: /posts/novo
+        - status [ref=f6e76]:
+          - generic [ref=f6e80]:
+            - paragraph [ref=f6e81]: O token do LinkedIn expira em 12 dias
+            - generic [ref=f6e82]: Reautorize antes de 31 de outubro para evitar falhas na publicação da fila.
+          - link "Revisar conexão" [ref=f6e84] [cursor=pointer]:
+            - /url: /conexao
+        - generic [ref=f6e87]:
+          - generic [ref=f6e90]:
+            - paragraph [ref=f6e91]: Próxima publicação
+            - paragraph [ref=f6e92]: 20 out · 09:00
+            - paragraph [ref=f6e93]: 3 aprendizados ao automatizar publicações com n8n
+          - generic [ref=f6e100]:
+            - paragraph [ref=f6e101]: Na fila
+            - paragraph [ref=f6e102]: 3 posts
+            - paragraph [ref=f6e103]: 1 com prioridade manual
+          - generic [ref=f6e111]:
+            - paragraph [ref=f6e112]: Agendados
+            - paragraph [ref=f6e113]: 2 posts
+            - paragraph [ref=f6e114]: Publicação por horário fixo
+          - generic [ref=f6e121]:
+            - paragraph [ref=f6e122]: Publicados no mês
+            - paragraph [ref=f6e123]: "3"
+            - paragraph [ref=f6e124]: Última publicação hoje, 09:00
+        - generic [ref=f6e129]:
+          - generic [ref=f6e130]:
+            - generic [ref=f6e131]:
+              - generic [ref=f6e132]:
+                - heading "Próximas publicações" [level=2] [ref=f6e133]
+                - paragraph [ref=f6e134]: Horários fixos e fila ordenada por prioridade efetiva.
+              - link "Abrir calendário" [ref=f6e136] [cursor=pointer]:
+                - /url: /calendario
+            - list [ref=f6e139]:
+              - listitem [ref=f6e140]:
+                - generic [ref=f6e141]:
+                  - generic [ref=f6e142]: "20"
+                  - generic [ref=f6e143]: out
+                - generic [ref=f6e144]:
+                  - paragraph [ref=f6e145]: 3 aprendizados ao automatizar publicações com n8n
+                  - generic [ref=f6e146]:
+                    - generic [ref=f6e147]: 09:00 · Horário fixo
+                    - generic [aria-hidden] [ref=f6e148]: ·
+                    - generic [ref=f6e149]: Agendado
+                - generic "Score 95 de 100" [ref=f6e150]: "95"
+              - listitem [ref=f6e154]:
+                - generic [ref=f6e155]:
+                  - generic [ref=f6e156]: "22"
+                  - generic [ref=f6e157]: out
+                - generic [ref=f6e158]:
+                  - paragraph [ref=f6e159]: "Mapa mental: do caos à pauta"
+                  - generic [ref=f6e160]:
+                    - generic [ref=f6e161]: 09:00 · Horário fixo
+                    - generic [aria-hidden] [ref=f6e162]: ·
+                    - generic [ref=f6e163]: Agendado
+                - generic "Score 81 de 100" [ref=f6e164]: "81"
+              - listitem [ref=f6e168]:
+                - generic [ref=f6e169]: "#1"
+                - generic [ref=f6e171]:
+                  - paragraph [ref=f6e172]: Como estruturei meu segundo cérebro no Obsidian
+                  - generic [ref=f6e173]:
+                    - generic [ref=f6e174]: Próximo da fila · prioridade manual
+                    - generic [aria-hidden] [ref=f6e175]: ·
+                    - generic [ref=f6e176]: Aprovado
+                - generic "Score 86 de 100" [ref=f6e177]: "86"
+              - listitem [ref=f6e181]:
+                - generic [ref=f6e182]: "#2"
+                - generic [ref=f6e184]:
+                  - paragraph [ref=f6e185]: O que ninguém te conta sobre consistência no LinkedIn
+                  - generic [ref=f6e186]:
+                    - generic [ref=f6e187]: 2º na fila
+                    - generic [aria-hidden] [ref=f6e188]: ·
+                    - generic [ref=f6e189]: Aprovado
+                - generic "Score 74 de 100" [ref=f6e190]: "74"
+          - generic [ref=f6e194]:
+            - generic [ref=f6e195]:
+              - generic [ref=f6e196]:
+                - heading "Automação" [level=2] [ref=f6e197]
+                - paragraph [ref=f6e198]: Rotina de publicação no fuso de São Paulo.
+              - generic [ref=f6e199]: Ativa
+            - generic [ref=f6e201]:
+              - generic [ref=f6e202]:
+                - paragraph [ref=f6e203]: Próxima execução
+                - paragraph [ref=f6e204]: ter, 20 out
+                - paragraph [ref=f6e205]: 09:00 · America/Sao_Paulo
+              - generic [ref=f6e206]:
+                - generic [ref=f6e207]:
+                  - term [ref=f6e208]: Rotina
+                  - definition [ref=f6e209]: 09:00 · Seg–Sex
+                - generic [ref=f6e210]:
+                  - term [ref=f6e211]: Dias ativos
+                  - definition [ref=f6e212]: Seg, Ter, Qua, Qui, Sex
+                - generic [ref=f6e213]:
+                  - term [ref=f6e214]: Alerta de fila
+                  - definition [ref=f6e215]: abaixo de 3 posts
+            - generic [ref=f6e216]:
+              - generic [ref=f6e217]: 5 seções ativas no n8n
+              - link "Configurar" [ref=f6e218] [cursor=pointer]:
+                - /url: /configuracoes
+        - generic [ref=f6e221]:
+          - generic [ref=f6e222]:
+            - generic [ref=f6e223]:
+              - generic [ref=f6e224]:
+                - heading "Atividade recente" [level=2] [ref=f6e225]
+                - paragraph [ref=f6e226]: Últimas execuções registradas em publish_logs.
+              - link "Ver todos os logs" [ref=f6e228] [cursor=pointer]:
+                - /url: /logs
+            - list [ref=f6e231]:
+              - listitem [ref=f6e232]:
+                - generic [ref=f6e236]:
+                  - generic [ref=f6e237]:
+                    - paragraph [ref=f6e238]: Publicação na fila
+                    - time [ref=f6e239]: seg, 19 out · 09:01
+                  - paragraph [ref=f6e240]: Post "Checklist de lançamento para projetos pessoais" publicado. ID urn:li:share:7391842104478593024.
+              - listitem [ref=f6e241]:
+                - generic [ref=f6e245]:
+                  - generic [ref=f6e246]:
+                    - paragraph [ref=f6e247]: Horário fixo
+                    - time [ref=f6e248]: seg, 19 out · 09:00
+                  - paragraph [ref=f6e249]: Nenhum post com horário vencido nesta verificação.
+              - listitem [ref=f6e250]:
+                - generic [ref=f6e254]:
+                  - generic [ref=f6e255]:
+                    - paragraph [ref=f6e256]: Alerta de fila
+                    - time [ref=f6e257]: seg, 19 out · 07:00
+                  - paragraph [ref=f6e258]: Fila com 3 posts aprovados. Alerta não enviado.
+              - listitem [ref=f6e259]:
+                - generic [ref=f6e263]:
+                  - generic [ref=f6e264]:
+                    - paragraph [ref=f6e265]: Busca de conteúdo
+                    - time [ref=f6e266]: seg, 19 out · 04:00
+                  - paragraph [ref=f6e267]: 34 temas coletados, 12 novos após deduplicação.
+              - listitem [ref=f6e268]:
+                - generic [ref=f6e272]:
+                  - generic [ref=f6e273]:
+                    - paragraph [ref=f6e274]: Score por IA
+                    - time [ref=f6e275]: dom, 18 out · 11:32
+                  - paragraph [ref=f6e276]: Score 86 gravado para "Como estruturei meu segundo cérebro no Obsidian".
+          - generic [ref=f6e277]:
+            - generic [ref=f6e278]:
+              - generic [ref=f6e279]:
+                - heading "Temas em alta" [level=2] [ref=f6e280]
+                - paragraph [ref=f6e281]: Coletados hoje pela busca de conteúdo.
+              - generic [ref=f6e282]: 12 novos
+            - list [ref=f6e284]:
+              - listitem [ref=f6e285]:
+                - generic [ref=f6e286]:
+                  - paragraph [ref=f6e287]: Por que líderes estão repensando o trabalho híbrido
+                  - generic [ref=f6e288]: "100"
+                - generic [ref=f6e292]:
+                  - generic [ref=f6e293]: Hacker News
+                  - generic [ref=f6e294]: Novo
+              - listitem [ref=f6e298]:
+                - generic [ref=f6e299]:
+                  - paragraph [ref=f6e300]: Obsidian lança novo recurso de bases de dados
+                  - generic [ref=f6e301]: "94"
+                - generic [ref=f6e305]:
+                  - generic [ref=f6e306]: Hacker News · Mastodon
+                  - generic [ref=f6e307]: Novo
+              - listitem [ref=f6e311]:
+                - generic [ref=f6e312]:
+                  - paragraph [ref=f6e313]: Automação com IA para pequenos negócios
+                  - generic [ref=f6e314]: "82"
+                - generic [ref=f6e318]:
+                  - generic [ref=f6e319]: Google Trends BR
+                  - generic [ref=f6e320]: Novo
+              - listitem [ref=f6e324]:
+                - generic [ref=f6e325]:
+                  - paragraph [ref=f6e326]: "Dopamina e produtividade: o debate voltou"
+                  - generic [ref=f6e327]: "71"
+                - generic [ref=f6e331]:
+                  - generic [ref=f6e332]: Wikipedia pt · Mastodon
+                  - generic [ref=f6e333]: Usado
+            - generic [ref=f6e337]:
+              - generic [ref=f6e338]: Busca diária às 07:00
+              - generic [ref=f6e339]: Rascunhos a partir de temas
+  - button "Open Next.js Dev Tools" [ref=f6e348] [cursor=pointer]:
+    - generic [ref=f6e351]:
+      - text: Compiling
+      - generic [ref=f6e352]:
+        - generic [ref=f6e353]: .
+        - generic [ref=f6e354]: .
+        - generic [ref=f6e355]: .

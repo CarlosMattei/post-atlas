@@ -1,0 +1,174 @@
+- generic [active] [ref=f10e1]:
+  - link "Pular para o conteúdo" [ref=f10e2] [cursor=pointer]:
+    - /url: "#conteudo"
+  - generic [ref=f10e3]:
+    - complementary [ref=f10e4]:
+      - generic [ref=f10e5]:
+        - generic [aria-hidden] [ref=f10e6]: A
+        - generic [ref=f10e7]:
+          - generic [ref=f10e8]: Post Atlas
+          - generic [ref=f10e9]: Espaço de trabalho
+      - navigation "Navegação principal" [ref=f10e10]:
+        - list [ref=f10e11]:
+          - listitem [ref=f10e12]:
+            - link "Home" [ref=f10e13] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f10e19]:
+            - link "Posts" [ref=f10e20] [cursor=pointer]:
+              - /url: /posts
+          - listitem [ref=f10e26]:
+            - link "Calendário" [ref=f10e27] [cursor=pointer]:
+              - /url: /calendario
+          - listitem [ref=f10e32]:
+            - link "Arquivados" [ref=f10e33] [cursor=pointer]:
+              - /url: /arquivados
+          - listitem [ref=f10e38]:
+            - link "Conexão" [ref=f10e39] [cursor=pointer]:
+              - /url: /conexao
+          - listitem [ref=f10e44]:
+            - link "Logs" [ref=f10e45] [cursor=pointer]:
+              - /url: /logs
+          - listitem [ref=f10e50]:
+            - link "Configurações" [ref=f10e51] [cursor=pointer]:
+              - /url: /configuracoes
+        - list [ref=f10e56]:
+          - listitem [ref=f10e57]:
+            - link "Sair" [ref=f10e58] [cursor=pointer]:
+              - /url: /sair
+    - main [ref=f10e63]:
+      - generic [ref=f10e64]:
+        - generic [ref=f10e65]:
+          - generic [ref=f10e66]:
+            - heading "Conexão" [level=1] [ref=f10e67]
+            - paragraph [ref=f10e68]: Estado das integrações que sustentam a publicação, o score e os alertas.
+          - button "Verificar conexões" [ref=f10e70] [cursor=pointer]
+        - status [ref=f10e74]:
+          - generic [ref=f10e78]:
+            - paragraph [ref=f10e79]: O webhook de score ainda não tem autenticação
+            - generic [ref=f10e80]: O TDD recomenda validar o cabeçalho X-Webhook-Secret no início do fluxo. Até lá, restrinja o acesso pela rede local ou Tailscale.
+          - link "Configurar segredo" [ref=f10e82] [cursor=pointer]:
+            - /url: /configuracoes
+        - generic [ref=f10e83]:
+          - generic [ref=f10e84]:
+            - paragraph [ref=f10e85]: 4 de 5 integrações conectadas
+            - paragraph [ref=f10e86]: 1 integração precisa de atenção
+          - generic [ref=f10e87]:
+            - generic [ref=f10e88]: 4 conectadas
+            - generic [ref=f10e89]: 1 com atenção
+        - generic [ref=f10e90]:
+          - generic [ref=f10e91]:
+            - generic [ref=f10e92]:
+              - generic [ref=f10e93]: in
+              - generic [ref=f10e94]:
+                - generic [ref=f10e95]:
+                  - heading "LinkedIn" [level=2] [ref=f10e96]
+                  - generic [ref=f10e97]: Atenção
+                - paragraph [ref=f10e98]: Publicação no perfil pessoal via Share on LinkedIn.
+            - generic [ref=f10e100]:
+              - generic [ref=f10e101]:
+                - term [ref=f10e102]: Perfil
+                - definition [ref=f10e103]: Carlos Mattei
+              - generic [ref=f10e104]:
+                - term [ref=f10e105]: Escopo
+                - definition [ref=f10e106]: w_member_social
+              - generic [ref=f10e107]:
+                - term [ref=f10e108]: Token expira em
+                - definition [ref=f10e109]: 31 out 2026
+            - generic [ref=f10e110]:
+              - generic [ref=f10e111]: Verificado hoje, 09:02
+              - button "Reautorizar" [ref=f10e112] [cursor=pointer]
+          - generic [ref=f10e113]:
+            - generic [ref=f10e119]:
+              - generic [ref=f10e120]:
+                - heading "n8n" [level=2] [ref=f10e121]
+                - generic [ref=f10e122]: Conectado
+              - paragraph [ref=f10e123]: Workflow unificado com as cinco seções de automação.
+            - generic [ref=f10e125]:
+              - generic [ref=f10e126]:
+                - term [ref=f10e127]: Workflow
+                - definition [ref=f10e128]: wf-linkedin-unificado
+              - generic [ref=f10e129]:
+                - term [ref=f10e130]: Última execução
+                - definition [ref=f10e131]: Hoje, 12:00
+              - generic [ref=f10e132]:
+                - term [ref=f10e133]: Seções ativas
+                - definition [ref=f10e134]: 5 de 5
+            - generic [ref=f10e135]:
+              - generic [ref=f10e136]: Verificado hoje, 09:02
+              - button "Abrir workflow" [ref=f10e137] [cursor=pointer]
+          - generic [ref=f10e141]:
+            - generic [ref=f10e147]:
+              - generic [ref=f10e148]:
+                - heading "OpenRouter" [level=2] [ref=f10e149]
+                - generic [ref=f10e150]: Conectado
+              - paragraph [ref=f10e151]: Avaliação de texto e geração de score com saída em JSON.
+            - generic [ref=f10e153]:
+              - generic [ref=f10e154]:
+                - term [ref=f10e155]: Modelo
+                - definition [ref=f10e156]: openrouter/auto
+              - generic [ref=f10e157]:
+                - term [ref=f10e158]: Temperatura
+                - definition [ref=f10e159]: "0.2"
+              - generic [ref=f10e160]:
+                - term [ref=f10e161]: Último score
+                - definition [ref=f10e162]: 86 · ontem
+            - generic [ref=f10e163]:
+              - generic [ref=f10e164]: Verificado hoje, 09:02
+              - button "Testar conexão" [ref=f10e165] [cursor=pointer]
+          - generic [ref=f10e166]:
+            - generic [ref=f10e172]:
+              - generic [ref=f10e173]:
+                - heading "Telegram" [level=2] [ref=f10e174]
+                - generic [ref=f10e175]: Conectado
+              - paragraph [ref=f10e176]: Alertas de fila curta e notificações de falha.
+            - generic [ref=f10e178]:
+              - generic [ref=f10e179]:
+                - term [ref=f10e180]: Chat
+                - definition [ref=f10e181]: Administrador
+              - generic [ref=f10e182]:
+                - term [ref=f10e183]: Último alerta
+                - definition [ref=f10e184]: Hoje, 10:00
+              - generic [ref=f10e185]:
+                - term [ref=f10e186]: Bot
+                - definition [ref=f10e187]: "@post_atlas_bot"
+            - generic [ref=f10e188]:
+              - generic [ref=f10e189]: Verificado hoje, 09:02
+              - button "Enviar teste" [ref=f10e190] [cursor=pointer]
+          - generic [ref=f10e191]:
+            - generic [ref=f10e198]:
+              - generic [ref=f10e199]:
+                - heading "PostgreSQL" [level=2] [ref=f10e200]
+                - generic [ref=f10e201]: Conectado
+              - paragraph [ref=f10e202]: Banco do projeto no Umbrel OS.
+            - generic [ref=f10e204]:
+              - generic [ref=f10e205]:
+                - term [ref=f10e206]: Host
+                - definition [ref=f10e207]: umbrel.local:5432
+              - generic [ref=f10e208]:
+                - term [ref=f10e209]: Banco
+                - definition [ref=f10e210]: post_atlas
+              - generic [ref=f10e211]:
+                - term [ref=f10e212]: Tabelas
+                - definition [ref=f10e213]: posts, schedule_config, publish_logs, trend_items
+            - generic [ref=f10e214]:
+              - generic [ref=f10e215]: Verificado hoje, 09:02
+              - button "Verificar" [ref=f10e216] [cursor=pointer]
+          - generic [ref=f10e217]:
+            - generic [ref=f10e218]:
+              - generic [ref=f10e219]:
+                - heading "Segurança e acesso" [level=2] [ref=f10e220]
+                - paragraph [ref=f10e221]: Itens pendentes na arquitetura do TDD antes de expor o front-end.
+              - generic [ref=f10e222]: 2 pendências
+            - generic [ref=f10e224]:
+              - generic [ref=f10e225]:
+                - heading "Autenticação do webhook" [level=3] [ref=f10e230]
+                - paragraph [ref=f10e231]: Incluir X-Webhook-Secret no POST de score e validar no primeiro nó do workflow. Hoje o endpoint aceita chamadas sem segredo.
+              - generic [ref=f10e232]:
+                - heading "Acesso do front-end ao Postgres" [level=3] [ref=f10e238]
+                - paragraph [ref=f10e239]: O Umbrel não oferece RLS integrado ao login. As opções em avaliação são webhooks autenticados, API própria ou PostgREST na rede local.
+            - generic [ref=f10e240]:
+              - generic [ref=f10e241]: "Referências: TDD v1.1, seções 2.4 e 8."
+              - link "Abrir configurações" [ref=f10e242] [cursor=pointer]:
+                - /url: /configuracoes
+  - button "Open Next.js Dev Tools" [ref=f10e248] [cursor=pointer]
+  - alert [ref=f10e252]

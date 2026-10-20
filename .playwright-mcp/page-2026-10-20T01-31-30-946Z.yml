@@ -1,0 +1,278 @@
+- generic [active] [ref=f7e1]:
+  - link "Pular para o conteúdo" [ref=f7e2] [cursor=pointer]:
+    - /url: "#conteudo"
+  - generic [ref=f7e3]:
+    - complementary [ref=f7e4]:
+      - generic [ref=f7e5]:
+        - generic [aria-hidden] [ref=f7e6]: A
+        - generic [ref=f7e7]:
+          - generic [ref=f7e8]: Post Atlas
+          - generic [ref=f7e9]: Espaço de trabalho
+      - navigation "Navegação principal" [ref=f7e10]:
+        - list [ref=f7e11]:
+          - listitem [ref=f7e12]:
+            - link "Home" [ref=f7e13] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f7e19]:
+            - link "Posts" [ref=f7e20] [cursor=pointer]:
+              - /url: /posts
+          - listitem [ref=f7e26]:
+            - link "Calendário" [ref=f7e27] [cursor=pointer]:
+              - /url: /calendario
+          - listitem [ref=f7e32]:
+            - link "Arquivados" [ref=f7e33] [cursor=pointer]:
+              - /url: /arquivados
+          - listitem [ref=f7e38]:
+            - link "Conexão" [ref=f7e39] [cursor=pointer]:
+              - /url: /conexao
+          - listitem [ref=f7e44]:
+            - link "Logs" [ref=f7e45] [cursor=pointer]:
+              - /url: /logs
+          - listitem [ref=f7e50]:
+            - link "Configurações" [ref=f7e51] [cursor=pointer]:
+              - /url: /configuracoes
+        - list [ref=f7e56]:
+          - listitem [ref=f7e57]:
+            - link "Sair" [ref=f7e58] [cursor=pointer]:
+              - /url: /sair
+    - main [ref=f7e63]:
+      - generic [ref=f7e64]:
+        - generic [ref=f7e65]:
+          - generic [ref=f7e66]:
+            - heading "Posts" [level=1] [ref=f7e67]
+            - paragraph [ref=f7e68]: Crie, avalie, agende e acompanhe todos os conteúdos antes da publicação no LinkedIn.
+          - generic [ref=f7e69]:
+            - button "Reavaliar scores" [ref=f7e70] [cursor=pointer]
+            - link "Novo post" [ref=f7e74] [cursor=pointer]:
+              - /url: /posts/novo
+        - generic [ref=f7e77]:
+          - generic [ref=f7e78]:
+            - generic [ref=f7e79]:
+              - generic [ref=f7e80]: Buscar posts
+              - searchbox "Buscar posts" [ref=f7e81]
+            - generic [ref=f7e82]:
+              - generic [ref=f7e83]: Filtrar por status
+              - combobox "Filtrar por status" [ref=f7e84]:
+                - option "Todos os status" [selected]
+                - option "Rascunho"
+                - option "Aprovado"
+                - option "Agendado"
+                - option "Publicando"
+                - option "Publicado"
+                - option "Erro"
+                - option "Arquivado"
+            - generic [ref=f7e85]:
+              - generic [ref=f7e86]: Filtrar por tag
+              - combobox "Filtrar por tag" [ref=f7e87]:
+                - option "Todas as tags" [selected]
+                - option "n8n"
+                - option "Automação"
+                - option "LinkedIn"
+                - option "Produtividade"
+                - option "IA"
+            - button "Filtros" [ref=f7e88] [cursor=pointer]
+            - generic [ref=f7e91]: 13 posts
+          - table [ref=f7e93]:
+            - rowgroup [ref=f7e94]:
+              - row [ref=f7e95]:
+                - columnheader "Post" [ref=f7e96]
+                - columnheader "Status" [ref=f7e97]
+                - columnheader "Score" [ref=f7e98]
+                - columnheader "Publicação" [ref=f7e99]
+                - columnheader "Atualizado" [ref=f7e100]
+                - columnheader "Ações" [ref=f7e101]
+            - rowgroup [ref=f7e103]:
+              - row [ref=f7e104]:
+                - 'cell "Checklist de lançamento para projetos pessoais Antes de anunciar qualquer projeto, passo por esta lista. Ela já evitou três lançamentos precipitados e me obriga a responder a pergunta mais difícil: isso está pronto para ser usado? projetos checklist" [ref=f7e105]':
+                  - paragraph [ref=f7e106]: Checklist de lançamento para projetos pessoais
+                  - paragraph [ref=f7e107]: "Antes de anunciar qualquer projeto, passo por esta lista. Ela já evitou três lançamentos precipitados e me obriga a responder a pergunta mais difícil: isso está pronto para ser usado?"
+                  - generic [ref=f7e108]:
+                    - generic [ref=f7e109]: projetos
+                    - generic [ref=f7e110]: checklist
+                - cell "Publicado" [ref=f7e111]
+                - cell [ref=f7e113]:
+                  - generic "Score 88 de 100" [ref=f7e114]: "88"
+                - cell "19 out · 09:00" [ref=f7e118]
+                - cell "19 out · 09:01" [ref=f7e119]
+                - cell [ref=f7e120]:
+                  - button "Ações de Checklist de lançamento para projetos pessoais" [ref=f7e121] [cursor=pointer]
+              - row [ref=f7e123]:
+                - 'cell "O mapa não é o território: revisitando meu processo Rascunho sobre como processos bonitos no papel escondem decisões ruins na prática. ensaio processos" [ref=f7e124]':
+                  - paragraph [ref=f7e125]: "O mapa não é o território: revisitando meu processo"
+                  - paragraph [ref=f7e126]: Rascunho sobre como processos bonitos no papel escondem decisões ruins na prática.
+                  - generic [ref=f7e127]:
+                    - generic [ref=f7e128]: ensaio
+                    - generic [ref=f7e129]: processos
+                - cell "Rascunho" [ref=f7e130]
+                - cell [ref=f7e132]:
+                  - generic "Score 58 de 100" [ref=f7e133]: "58"
+                - cell "—" [ref=f7e137]
+                - cell "18 out · 16:05" [ref=f7e138]
+                - cell [ref=f7e139]:
+                  - 'button "Ações de O mapa não é o território: revisitando meu processo" [ref=f7e140] [cursor=pointer]'
+              - row [ref=f7e142]:
+                - cell "Uma semana usando IA para revisar textos Testei a IA como revisora, não como escritora. O resultado foi melhor do que esperava para clareza e pior para voz. Anotações de uma semana de uso. ia escrita" [ref=f7e143]:
+                  - paragraph [ref=f7e144]: Uma semana usando IA para revisar textos
+                  - paragraph [ref=f7e145]: Testei a IA como revisora, não como escritora. O resultado foi melhor do que esperava para clareza e pior para voz. Anotações de uma semana de uso.
+                  - generic [ref=f7e146]:
+                    - generic [ref=f7e147]: ia
+                    - generic [ref=f7e148]: escrita
+                - cell "Rascunho" [ref=f7e149]
+                - cell [ref=f7e151]:
+                  - generic "Score 61 de 100" [ref=f7e152]: "61"
+                - cell "—" [ref=f7e156]
+                - cell "18 out · 13:40" [ref=f7e157]
+                - cell [ref=f7e158]:
+                  - button "Ações de Uma semana usando IA para revisar textos" [ref=f7e159] [cursor=pointer]
+              - row [ref=f7e161]:
+                - cell "Como estruturei meu segundo cérebro no Obsidian Um passo a passo honesto sobre como saí de 40 abas abertas para um sistema simples de captura, conexão e revisão. O ponto central não é a ferramenta, é a rotina de revisão semanal. produtividade obsidian pkm" [ref=f7e162]:
+                  - paragraph [ref=f7e163]: Como estruturei meu segundo cérebro no Obsidian
+                  - paragraph [ref=f7e164]: Um passo a passo honesto sobre como saí de 40 abas abertas para um sistema simples de captura, conexão e revisão. O ponto central não é a ferramenta, é a rotina de revisão semanal.
+                  - generic [ref=f7e165]:
+                    - generic [ref=f7e166]: produtividade
+                    - generic [ref=f7e167]: obsidian
+                    - generic [ref=f7e168]: pkm
+                - cell "Aprovado" [ref=f7e169]
+                - cell [ref=f7e171]:
+                  - generic "Score 86 de 100" [ref=f7e172]: "86"
+                - cell "—" [ref=f7e176]
+                - cell "18 out · 10:10" [ref=f7e177]
+                - cell [ref=f7e178]:
+                  - button "Ações de Como estruturei meu segundo cérebro no Obsidian" [ref=f7e179] [cursor=pointer]
+              - row [ref=f7e181]:
+                - 'cell "3 aprendizados ao automatizar publicações com n8n Depois de dois meses rodando a automação, três coisas mudaram minha forma de trabalhar: menos ferramentas, mais observabilidade e um processo de aprovação que não depende de memória. n8n automação processos" [ref=f7e182]':
+                  - paragraph [ref=f7e183]: 3 aprendizados ao automatizar publicações com n8n
+                  - paragraph [ref=f7e184]: "Depois de dois meses rodando a automação, três coisas mudaram minha forma de trabalhar: menos ferramentas, mais observabilidade e um processo de aprovação que não depende de memória."
+                  - generic [ref=f7e185]:
+                    - generic [ref=f7e186]: n8n
+                    - generic [ref=f7e187]: automação
+                    - generic [ref=f7e188]: processos
+                - cell "Agendado" [ref=f7e189]
+                - cell [ref=f7e191]:
+                  - generic "Score 95 de 100" [ref=f7e192]: "95"
+                - cell "20 out · 09:00" [ref=f7e196]
+                - cell "18 out · 08:45" [ref=f7e197]
+                - cell [ref=f7e198]:
+                  - button "Ações de 3 aprendizados ao automatizar publicações com n8n" [ref=f7e199] [cursor=pointer]
+              - row [ref=f7e201]:
+                - cell "Automação não é sobre ferramentas A ferramenta é a parte fácil. O difícil é decidir o que merece ser automatizado e o que precisa continuar sendo um ato deliberado. automação ensaio" [ref=f7e202]:
+                  - paragraph [ref=f7e203]: Automação não é sobre ferramentas
+                  - paragraph [ref=f7e204]: A ferramenta é a parte fácil. O difícil é decidir o que merece ser automatizado e o que precisa continuar sendo um ato deliberado.
+                  - generic [ref=f7e205]:
+                    - generic [ref=f7e206]: automação
+                    - generic [ref=f7e207]: ensaio
+                - cell "Aprovado" [ref=f7e208]
+                - cell [ref=f7e210]:
+                  - generic "Score 69 de 100" [ref=f7e211]: "69"
+                - cell "—" [ref=f7e215]
+                - cell "18 out · 05:50" [ref=f7e216]
+                - cell [ref=f7e217]:
+                  - button "Ações de Automação não é sobre ferramentas" [ref=f7e218] [cursor=pointer]
+              - row [ref=f7e220]:
+                - cell "O que ninguém te conta sobre consistência no LinkedIn Consistência não é publicar todos os dias. É reduzir o custo de decisão para que publicar deixe de ser um evento e passe a ser parte da rotina. linkedin carreira" [ref=f7e221]:
+                  - paragraph [ref=f7e222]: O que ninguém te conta sobre consistência no LinkedIn
+                  - paragraph [ref=f7e223]: Consistência não é publicar todos os dias. É reduzir o custo de decisão para que publicar deixe de ser um evento e passe a ser parte da rotina.
+                  - generic [ref=f7e224]:
+                    - generic [ref=f7e225]: linkedin
+                    - generic [ref=f7e226]: carreira
+                - cell "Aprovado" [ref=f7e227]
+                - cell [ref=f7e229]:
+                  - generic "Score 74 de 100" [ref=f7e230]: "74"
+                - cell "—" [ref=f7e234]
+                - cell "17 out · 12:30" [ref=f7e235]
+                - cell [ref=f7e236]:
+                  - button "Ações de O que ninguém te conta sobre consistência no LinkedIn" [ref=f7e237] [cursor=pointer]
+              - row [ref=f7e239]:
+                - 'cell "Por que migrei minha automação para o Umbrel Sair de uma pilha de serviços gratuitos e voltar para um servidor local pareceu um passo atrás. Foi o contrário: ganhei controle, previsibilidade e uma conta de energia menor do que a de café. umbrel self-hosted n8n" [ref=f7e240]':
+                  - paragraph [ref=f7e241]: Por que migrei minha automação para o Umbrel
+                  - paragraph [ref=f7e242]: "Sair de uma pilha de serviços gratuitos e voltar para um servidor local pareceu um passo atrás. Foi o contrário: ganhei controle, previsibilidade e uma conta de energia menor do que a de café."
+                  - generic [ref=f7e243]:
+                    - generic [ref=f7e244]: umbrel
+                    - generic [ref=f7e245]: self-hosted
+                    - generic [ref=f7e246]: n8n
+                - cell "Erro 2 tentativas" [ref=f7e247]:
+                  - generic [ref=f7e248]: Erro
+                  - paragraph [ref=f7e249]: 2 tentativas
+                - cell [ref=f7e250]:
+                  - generic "Score 79 de 100" [ref=f7e251]: "79"
+                - cell "—" [ref=f7e255]
+                - cell "17 out · 06:22" [ref=f7e256]
+                - cell [ref=f7e257]:
+                  - button "Ações de Por que migrei minha automação para o Umbrel" [ref=f7e258] [cursor=pointer]
+              - row [ref=f7e260]:
+                - 'cell "Mapa mental: do caos à pauta Como transformo anotações soltas em uma pauta com começo, meio e fim. O método tem três etapas e cabe em uma folha de papel. pauta processos" [ref=f7e261]':
+                  - paragraph [ref=f7e262]: "Mapa mental: do caos à pauta"
+                  - paragraph [ref=f7e263]: Como transformo anotações soltas em uma pauta com começo, meio e fim. O método tem três etapas e cabe em uma folha de papel.
+                  - generic [ref=f7e264]:
+                    - generic [ref=f7e265]: pauta
+                    - generic [ref=f7e266]: processos
+                - cell "Agendado" [ref=f7e267]
+                - cell [ref=f7e269]:
+                  - generic "Score 81 de 100" [ref=f7e270]: "81"
+                - cell "22 out · 09:00" [ref=f7e274]
+                - cell "16 out · 14:05" [ref=f7e275]
+                - cell [ref=f7e276]:
+                  - 'button "Ações de Mapa mental: do caos à pauta" [ref=f7e277] [cursor=pointer]'
+              - row [ref=f7e279]:
+                - cell "Como organizar tendências sem virar refém delas Acompanhar o que está em alta é útil até o momento em que pauta deixa de ser escolha. Meu filtro de três perguntas para decidir o que ignorar. tendências curadoria" [ref=f7e280]:
+                  - paragraph [ref=f7e281]: Como organizar tendências sem virar refém delas
+                  - paragraph [ref=f7e282]: Acompanhar o que está em alta é útil até o momento em que pauta deixa de ser escolha. Meu filtro de três perguntas para decidir o que ignorar.
+                  - generic [ref=f7e283]:
+                    - generic [ref=f7e284]: tendências
+                    - generic [ref=f7e285]: curadoria
+                - cell "Publicado" [ref=f7e286]
+                - cell [ref=f7e288]:
+                  - generic "Score 84 de 100" [ref=f7e289]: "84"
+                - cell "16 out · 09:00" [ref=f7e293]
+                - cell "16 out · 09:01" [ref=f7e294]
+                - cell [ref=f7e295]:
+                  - button "Ações de Como organizar tendências sem virar refém delas" [ref=f7e296] [cursor=pointer]
+              - row [ref=f7e298]:
+                - cell "Rotina de leitura para quem trabalha o dia inteiro Não é sobre ler mais rápido. É sobre criar atrito zero para abrir o livro certo na hora certa. leitura rotina" [ref=f7e299]:
+                  - paragraph [ref=f7e300]: Rotina de leitura para quem trabalha o dia inteiro
+                  - paragraph [ref=f7e301]: Não é sobre ler mais rápido. É sobre criar atrito zero para abrir o livro certo na hora certa.
+                  - generic [ref=f7e302]:
+                    - generic [ref=f7e303]: leitura
+                    - generic [ref=f7e304]: rotina
+                - cell "Arquivado" [ref=f7e305]
+                - cell [ref=f7e307]:
+                  - generic "Score 68 de 100" [ref=f7e308]: "68"
+                - cell "—" [ref=f7e312]
+                - cell "10 out · 06:30" [ref=f7e313]
+                - cell [ref=f7e314]:
+                  - button "Ações de Rotina de leitura para quem trabalha o dia inteiro" [ref=f7e315] [cursor=pointer]
+              - row [ref=f7e317]:
+                - cell "Três perguntas antes de aceitar um novo projeto Um filtro simples para decidir o que entra na agenda sem transformar toda oportunidade em compromisso. carreira decisão" [ref=f7e318]:
+                  - paragraph [ref=f7e319]: Três perguntas antes de aceitar um novo projeto
+                  - paragraph [ref=f7e320]: Um filtro simples para decidir o que entra na agenda sem transformar toda oportunidade em compromisso.
+                  - generic [ref=f7e321]:
+                    - generic [ref=f7e322]: carreira
+                    - generic [ref=f7e323]: decisão
+                - cell "Publicado" [ref=f7e324]
+                - cell [ref=f7e326]:
+                  - generic "Score 77 de 100" [ref=f7e327]: "77"
+                - cell "08 out · 09:00" [ref=f7e331]
+                - cell "08 out · 09:01" [ref=f7e332]
+                - cell [ref=f7e333]:
+                  - button "Ações de Três perguntas antes de aceitar um novo projeto" [ref=f7e334] [cursor=pointer]
+              - row [ref=f7e336]:
+                - 'cell "Postmortem: quando o workflow falhou no melhor momento Um detalhe de autenticação derrubou a publicação justamente na semana de maior audiência. O que eu mudei depois disso. n8n postmortem" [ref=f7e337]':
+                  - paragraph [ref=f7e338]: "Postmortem: quando o workflow falhou no melhor momento"
+                  - paragraph [ref=f7e339]: Um detalhe de autenticação derrubou a publicação justamente na semana de maior audiência. O que eu mudei depois disso.
+                  - generic [ref=f7e340]:
+                    - generic [ref=f7e341]: n8n
+                    - generic [ref=f7e342]: postmortem
+                - cell "Arquivado" [ref=f7e343]
+                - cell [ref=f7e345]:
+                  - generic "Score 55 de 100" [ref=f7e346]: "55"
+                - cell "—" [ref=f7e350]
+                - cell "04 out · 15:20" [ref=f7e351]
+                - cell [ref=f7e352]:
+                  - 'button "Ações de Postmortem: quando o workflow falhou no melhor momento" [ref=f7e353] [cursor=pointer]'
+          - generic [ref=f7e355]:
+            - paragraph [ref=f7e356]: A fila considera ordem manual, score efetivo e data de criação.
+            - generic [ref=f7e357]:
+              - button "Página anterior" [disabled] [ref=f7e358]
+              - generic [ref=f7e361]: 1 de 1
+              - button "Próxima página" [disabled] [ref=f7e362]
+  - button "Open Next.js Dev Tools" [ref=f7e370] [cursor=pointer]

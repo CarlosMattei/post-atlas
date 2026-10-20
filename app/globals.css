@@ -1,26 +1,127 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  color-scheme: light;
+  --ds-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --ds-surface: #ffffff;
+  --ds-surface-hover: #f1f2f4;
+  --ds-surface-selected: #e9f2ff;
+  --ds-app: #f7f8f9;
+  --ds-text: #172b4d;
+  --ds-text-subtle: #44546f;
+  --ds-selected-text: #0c66e4;
+  --ds-line: #dfe1e6;
+  --ds-brand: #0c66e4;
+  --ds-brand-hover: #0055cc;
+  --ds-brand-pressed: #09326c;
+  --ds-on-brand: #ffffff;
+  --ds-neutral: #f1f2f4;
+  --ds-neutral-hover: #dcdfe4;
+  --ds-danger: #c9372c;
+  --ds-danger-hover: #ae2e24;
+  --ds-on-danger: #ffffff;
+  --ds-success-bg: #dcfff1;
+  --ds-success-text: #216e4e;
+  --ds-warning-bg: #fff7d6;
+  --ds-warning-text: #7f5f01;
+  --ds-danger-bg: #ffeceb;
+  --ds-danger-text: #ae2e24;
+  --ds-info-bg: #e9f2ff;
+  --ds-info-text: #0c66e4;
+  --ds-discovery-bg: #f3f0ff;
+  --ds-discovery-text: #5e4db2;
+  --ds-neutral-bg: #f1f2f4;
+  --ds-neutral-text: #44546f;
+  --ds-focus: #0c66e4;
+  --ds-shadow-raised: 0 1px 1px rgba(9, 30, 66, 0.08),
+    0 0 1px rgba(9, 30, 66, 0.12);
+  --ds-shadow-overlay: 0 8px 12px rgba(9, 30, 66, 0.15),
+    0 0 1px rgba(9, 30, 66, 0.2);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+    --ds-surface: #22272b;
+    --ds-surface-hover: #2c333a;
+    --ds-surface-selected: #1c2b41;
+    --ds-app: #1d2125;
+    --ds-text: #b6c2cf;
+    --ds-text-subtle: #9fadbc;
+    --ds-selected-text: #579dff;
+    --ds-line: #38414a;
+    --ds-brand: #579dff;
+    --ds-brand-hover: #85b8ff;
+    --ds-brand-pressed: #cce0ff;
+    --ds-on-brand: #1d2125;
+    --ds-neutral: #2c333a;
+    --ds-neutral-hover: #38414a;
+    --ds-danger: #f15b50;
+    --ds-danger-hover: #ff8f85;
+    --ds-on-danger: #1d2125;
+    --ds-success-bg: #164b35;
+    --ds-success-text: #7ee2b8;
+    --ds-warning-bg: #533f04;
+    --ds-warning-text: #f5e989;
+    --ds-danger-bg: #42221f;
+    --ds-danger-text: #fd9891;
+    --ds-info-bg: #1c2b41;
+    --ds-info-text: #579dff;
+    --ds-discovery-bg: #352c63;
+    --ds-discovery-text: #b8acf6;
+    --ds-neutral-bg: #2c333a;
+    --ds-neutral-text: #9fadbc;
+    --ds-focus: #579dff;
+    --ds-shadow-raised: 0 1px 1px rgba(0, 0, 0, 0.4),
+      0 0 1px rgba(0, 0, 0, 0.6);
+    --ds-shadow-overlay: 0 8px 12px rgba(0, 0, 0, 0.5),
+      0 0 1px rgba(0, 0, 0, 0.7);
   }
 }
 
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-ds: var(--ds-font);
+  --color-ds-surface: var(--ds-surface);
+  --color-ds-surface-hover: var(--ds-surface-hover);
+  --color-ds-surface-selected: var(--ds-surface-selected);
+  --color-ds-app: var(--ds-app);
+  --color-ds-text: var(--ds-text);
+  --color-ds-text-subtle: var(--ds-text-subtle);
+  --color-ds-selected-text: var(--ds-selected-text);
+  --color-ds-line: var(--ds-line);
+  --color-ds-brand: var(--ds-brand);
+  --color-ds-brand-hover: var(--ds-brand-hover);
+  --color-ds-brand-pressed: var(--ds-brand-pressed);
+  --color-ds-on-brand: var(--ds-on-brand);
+  --color-ds-neutral: var(--ds-neutral);
+  --color-ds-neutral-hover: var(--ds-neutral-hover);
+  --color-ds-danger: var(--ds-danger);
+  --color-ds-danger-hover: var(--ds-danger-hover);
+  --color-ds-on-danger: var(--ds-on-danger);
+  --color-ds-success-bg: var(--ds-success-bg);
+  --color-ds-success-text: var(--ds-success-text);
+  --color-ds-warning-bg: var(--ds-warning-bg);
+  --color-ds-warning-text: var(--ds-warning-text);
+  --color-ds-danger-bg: var(--ds-danger-bg);
+  --color-ds-danger-text: var(--ds-danger-text);
+  --color-ds-info-bg: var(--ds-info-bg);
+  --color-ds-info-text: var(--ds-info-text);
+  --color-ds-discovery-bg: var(--ds-discovery-bg);
+  --color-ds-discovery-text: var(--ds-discovery-text);
+  --color-ds-neutral-bg: var(--ds-neutral-bg);
+  --color-ds-neutral-text: var(--ds-neutral-text);
+  --color-ds-focus: var(--ds-focus);
+  --radius-ds: 3px;
+  --radius-ds-lg: 6px;
+  --shadow-ds-raised: var(--ds-shadow-raised);
+  --shadow-ds-overlay: var(--ds-shadow-overlay);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ds-app);
+  color: var(--ds-text);
+  font-family: var(--ds-font);
 }

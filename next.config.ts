@@ -1,4 +1,9 @@
 import type { NextConfig } from "next";
+import optimizeLocales from "@react-aria/optimize-locales-plugin";
+
+const localeOptimization = optimizeLocales.turbopack({
+  locales: ["en-US", "pt-BR"],
+});
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -13,6 +18,7 @@ const nextConfig: NextConfig = {
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },
+      ...localeOptimization.rules,
     },
   },
 };
