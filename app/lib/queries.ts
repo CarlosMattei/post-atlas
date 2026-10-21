@@ -9,6 +9,8 @@ import type {
   Workflow,
 } from "./types";
 import { query } from "./db";
+import { getPostImageUrl } from "./s3";
+import { connection } from "next/server";
 import type { QueryResultRow } from "pg";
 
 interface PostRow extends QueryResultRow {
@@ -17,6 +19,8 @@ interface PostRow extends QueryResultRow {
   body: string;
   tags: string[] | null;
   image_path: string | null;
+  image_paths?: string[] | null;
+  image_alts?: string[] | null;
   status: Post["status"];
   ai_score: number | null;
   score_override: number | null;
@@ -99,10 +103,33 @@ function mapTrendRow(row: TrendItemRow): TrendItem {
   };
 }
 
-function mapRow(row: PostRow): Post {
-  const images: PostImage[] = row.image_path
-    ? [{ id: row.id + "-img", url: row.image_path, alt: "" }]
-    : [];
+async function mapRow(row: PostRow): Promise<Post> {
+  const paths = row.image_paths?.length
+    ? row.image_paths
+    : row.image_path
+      ? [row.image_path]
+      : [];
+  const alts = row.image_alts ?? [];
+
+  const resolved = await Promise.all(
+    paths.map(async (path, index): Promise<PostImage | null> => {
+      const legacyUrl = /^https?:\/\//i.test(path);
+
+      try {
+        return {
+          id: `${row.id}-img-${index}`,
+          key: legacyUrl ? undefined : path,
+          url: legacyUrl ? path : await getPostImageUrl(path),
+          alt: alts[index] ?? "",
+        };
+      } catch (error) {
+        console.error(`Imagem ${path} do post ${row.id} é inválida:`, error);
+        return null;
+      }
+    }),
+  );
+  const images = resolved.filter((image): image is PostImage => image !== null);
+
   return {
     id: row.id,
     title: row.title,
@@ -124,8 +151,9 @@ function mapRow(row: PostRow): Post {
 }
 
 export async function getPosts(): Promise<Post[]> {
+  await connection();
   const rows = await query<PostRow>(`SELECT * FROM posts ORDER BY updated_at DESC`);
-  return rows.map(mapRow);
+  return Promise.all(rows.map(mapRow));
 }
 
 export async function getPostById(id: string): Promise<Post | undefined> {
@@ -135,6 +163,7 @@ export async function getPostById(id: string): Promise<Post | undefined> {
     return undefined;
   }
 
+  await connection();
   const [row] = await query<PostRow>(`SELECT * FROM posts WHERE id = $1`, [id]);
   return row ? mapRow(row) : undefined;
 }

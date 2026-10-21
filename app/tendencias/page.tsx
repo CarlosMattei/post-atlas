@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: "Tendências · Post Atlas",
 };
 
+export const instant = false;
+
 export default async function TrendsPage() {
   const trendItems = await getTrendItems();
 
@@ -16,7 +18,6 @@ export default async function TrendsPage() {
         title="Tendências"
         description="Explore os temas coletados e encontre assuntos relevantes para seus próximos posts."
       />
-      <TrendItemsList items={trendItems} />
-    </PageContainer>
+      <TrendItemsList items={trendItems} />    </PageContainer>
   );
 }

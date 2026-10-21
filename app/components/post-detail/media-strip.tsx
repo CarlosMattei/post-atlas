@@ -72,7 +72,7 @@ export function MediaStrip({ form }: { form: PostFormController }) {
             ref={inputRef}
             type="file"
             multiple
-            accept="image/png,image/jpeg,image/webp"
+            accept="image/png,image/jpeg,image/webp,image/gif"
             className="sr-only"
             onChange={(event) => {
               form.addFiles(event.target.files);
@@ -94,7 +94,8 @@ export function MediaStrip({ form }: { form: PostFormController }) {
                 <div className="min-w-0">
                   <p className="text-sm font-medium text-ds-text">Sem mídia</p>
                   <p className="text-[11px] leading-4 text-ds-text-subtle">
-                    PNG, JPG ou WebP · até {MAX_IMAGES} imagens
+                    PNG, JPG, WebP ou GIF · até {MAX_IMAGES} imagens. Novas
+                    imagens são enviadas ao salvar.
                   </p>
                 </div>
               </div>

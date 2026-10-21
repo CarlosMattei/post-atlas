@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { effectiveScore, formatDateTime } from "@/app/lib/format";
 import type { Post } from "@/app/lib/types";
-import { Button } from "./button";
-import { MoreHorizontalIcon, RotateCcwIcon } from "./icons";
+import { PostRowActions } from "./post-row-actions";
 import { ScorePill, StatusBadge, Tag } from "./ui";
 
 function formatPostDate(post: Post): string {
@@ -117,24 +116,7 @@ export function PostsTable({
               </td>
 
               <td className="px-4 py-3 text-right">
-                {archived ? (
-                  <Button
-                    variant="subtle"
-                    size="sm"
-                    aria-label={`Restaurar ${post.title}`}
-                  >
-                    <RotateCcwIcon className="size-4" />
-                    Restaurar
-                  </Button>
-                ) : (
-                  <Button
-                    variant="subtle"
-                    size="icon-sm"
-                    aria-label={`Ações de ${post.title}`}
-                  >
-                    <MoreHorizontalIcon className="size-4" />
-                  </Button>
-                )}
+                <PostRowActions post={post} />
               </td>
             </tr>
           ))}

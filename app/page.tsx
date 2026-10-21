@@ -47,6 +47,8 @@ export const metadata: Metadata = {
   title: "Visão geral · Post Atlas",
 };
 
+export const instant = false;
+
 export default async function HomePage() {
   const { posts, publishLogs, scheduleConfig, trendItems, newTrendCount } =
     await getHomeDashboardData();

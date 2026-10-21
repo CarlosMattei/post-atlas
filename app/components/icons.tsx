@@ -379,6 +379,15 @@ export function CopyIcon(props: IconProps) {
   );
 }
 
+export function EditIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12.5 20H21" />
+      <path d="M16.4 3.6a2 2 0 0 1 2.8 2.8L7.5 18.1l-4 1.4 1.4-4z" />
+    </svg>
+  );
+}
+
 export function ArrowLeftIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>

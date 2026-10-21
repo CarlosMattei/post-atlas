@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS posts (
   title             text          NOT NULL CHECK (length(title) BETWEEN 1 AND 200),
   body              text          NOT NULL CHECK (length(body) BETWEEN 1 AND 3000),
   image_path        text,
+  image_paths       text[]        NOT NULL DEFAULT '{}',
+  image_alts        text[]        NOT NULL DEFAULT '{}',
   tags              text[]        NOT NULL DEFAULT '{}',
   status            post_status   NOT NULL DEFAULT 'rascunho',
   ai_score          smallint      CHECK (ai_score BETWEEN 0 AND 100),
@@ -63,11 +65,23 @@ CREATE TABLE IF NOT EXISTS posts (
 );
 
 COMMENT ON TABLE posts IS 'Posts do LinkedIn: conteúdo, status, score e agendamento.';
+COMMENT ON COLUMN posts.image_path IS 'Capa do post (primeira imagem). Mantida para compatibilidade com o workflow.';
+COMMENT ON COLUMN posts.image_paths IS 'Chaves dos objetos no bucket de imagens, na ordem do carrossel.';
+COMMENT ON COLUMN posts.image_alts IS 'Texto alternativo de cada imagem, na mesma ordem de image_paths.';
 COMMENT ON COLUMN posts.ai_score IS 'Score de 0 a 100 atribuído pela IA (OpenRouter), somente com base no texto.';
 COMMENT ON COLUMN posts.score_override IS 'Ajuste manual do score. Quando preenchido, prevalece sobre ai_score.';
 COMMENT ON COLUMN posts.manual_order IS 'Posição definida manualmente na fila. NULL = ordenar pelo score.';
 COMMENT ON COLUMN posts.scheduled_at IS 'Horário fixo de publicação. Posts com este campo não entram na fila diária.';
 COMMENT ON COLUMN posts.attempts IS 'Número de tentativas de publicação (incrementar na reserva).';
+
+-- Migração v1.2: upload de imagens no Neon Object Storage.
+-- A coluna image_path guarda a capa; image_paths guarda o carrossel completo.
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS image_paths text[] NOT NULL DEFAULT '{}';
+ALTER TABLE posts ADD COLUMN IF NOT EXISTS image_alts text[] NOT NULL DEFAULT '{}';
+
+UPDATE posts
+SET image_paths = ARRAY[image_path]
+WHERE image_path IS NOT NULL AND cardinality(image_paths) = 0;
 
 -- Índice para a fila diária (posts aprovados, sem horário fixo, não publicados)
 CREATE INDEX IF NOT EXISTS idx_posts_queue

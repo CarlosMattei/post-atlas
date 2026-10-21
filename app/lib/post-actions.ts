@@ -5,9 +5,31 @@ import { redirect } from "next/navigation";
 import type { QueryResultRow } from "pg";
 import type { PostStatus } from "./types";
 import { query } from "./db";
+import { MAX_IMAGES } from "./post-form";
+import { deletePostImageObjects, isPostImageKey } from "./s3";
 
 interface IdRow extends QueryResultRow {
   id: string;
+}
+
+interface PostStatusRow extends QueryResultRow {
+  status: PostStatus;
+}
+
+interface PostContentRow extends PostStatusRow {
+  title: string;
+  body: string;
+  tags: string[];
+}
+
+interface PostImagePathsRow extends QueryResultRow {
+  image_path: string | null;
+  image_paths?: string[] | null;
+}
+
+interface PostImageInput {
+  key: string;
+  alt: string;
 }
 
 const postStatuses = new Set<PostStatus>([
@@ -45,6 +67,56 @@ function parseTags(value: unknown): string[] {
   });
 
   return [...new Set(tags.filter(Boolean))];
+}
+
+function parseImages(value: unknown): PostImageInput[] {
+  if (value === null || value === undefined) return [];
+
+  if (!Array.isArray(value) || value.length > MAX_IMAGES) {
+    throw new Error(`Envie até ${MAX_IMAGES} imagens por post.`);
+  }
+
+  return value.map((item) => {
+    if (!item || typeof item !== "object") {
+      throw new Error("Imagem inválida.");
+    }
+
+    const { key, alt } = item as { key?: unknown; alt?: unknown };
+
+    if (typeof key !== "string" || key.trim().length === 0) {
+      throw new Error("A imagem não tem uma chave válida.");
+    }
+
+    const normalized = key.trim();
+
+    if (!isPostImageKey(normalized) && !/^https?:\/\//i.test(normalized)) {
+      throw new Error("A imagem precisa estar no bucket de uploads do post.");
+    }
+
+    if (alt !== undefined && typeof alt !== "string") {
+      throw new Error("Texto alternativo inválido.");
+    }
+
+    return { key: normalized, alt: (alt ?? "").trim().slice(0, 300) };
+  });
+}
+
+function parseImagesField(value: FormDataEntryValue | null): PostImageInput[] {
+  if (typeof value !== "string" || value.trim().length === 0) return [];
+
+  try {
+    return parseImages(JSON.parse(value));
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      throw new Error("Lista de imagens inválida.");
+    }
+    throw error;
+  }
+}
+
+function imagePathsFromRow(row: PostImagePathsRow): string[] {
+  if (row.image_paths?.length) return row.image_paths;
+  return row.image_path ? [row.image_path] : [];
 }
 
 function validateContent(title: unknown, body: unknown) {
@@ -115,6 +187,7 @@ export async function createPost(formData: FormData): Promise<void> {
     formData.get("title"),
     formData.get("body"),
   );
+  const images = parseImagesField(formData.get("images"));
   const tags = parseTags(String(formData.get("tags") ?? "").split(","));
   const strategy = formData.get("strategy") === "fixo" ? "fixo" : "fila";
   const requestedStatus =
@@ -141,10 +214,19 @@ export async function createPost(formData: FormData): Promise<void> {
       ? "agendado"
       : requestedStatus;
   const [created] = await query<IdRow>(
-    `INSERT INTO posts (title, body, tags, status, scheduled_at)
-     VALUES ($1, $2, $3, $4, $5)
+    `INSERT INTO posts (title, body, tags, status, scheduled_at, image_path, image_paths, image_alts)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
      RETURNING id`,
-    [title, body, tags, status, scheduledAt],
+    [
+      title,
+      body,
+      tags,
+      status,
+      scheduledAt,
+      images[0]?.key ?? null,
+      images.map((image) => image.key),
+      images.map((image) => image.alt),
+    ],
   );
 
   if (!created) throw new Error("Não foi possível criar o post no Neon.");
@@ -158,7 +240,7 @@ export async function updatePost(
     title: string;
     body: string;
     tags: string[];
-    imageUrl: string | null;
+    images: PostImageInput[];
     scheduledAt: string | null;
   },
 ): Promise<void> {
@@ -168,14 +250,7 @@ export async function updatePost(
   }
   const { title, body } = validateContent(input.title, input.body);
   const tags = parseTags(input.tags);
-  if (
-    input.imageUrl !== null &&
-    (typeof input.imageUrl !== "string" ||
-      !/^https?:\/\//i.test(input.imageUrl))
-  ) {
-    throw new Error("A imagem precisa ter uma URL HTTP ou HTTPS.");
-  }
-  const imageUrl = input.imageUrl;
+  const images = parseImages(input.images);
   const scheduledAt =
     input.scheduledAt === null
       ? null
@@ -187,21 +262,41 @@ export async function updatePost(
     throw new Error("Data e hora inválidas.");
   }
 
+  const [existing] = await query<PostImagePathsRow>(
+    `SELECT image_path, image_paths FROM posts WHERE id = $1`,
+    [id],
+  );
+  if (!existing) throw new Error("Post não encontrado.");
+
   const updated = await query<IdRow>(
     `UPDATE posts
-     SET title = $2, body = $3, tags = $4, image_path = $5,
-         scheduled_at = $6,
+     SET title = $2, body = $3, tags = $4,
+         image_path = $5, image_paths = $6, image_alts = $7,
+         scheduled_at = $8,
          status = CASE
-           WHEN status = 'agendado' AND $6::timestamptz IS NULL
+           WHEN status = 'agendado' AND $8::timestamptz IS NULL
              THEN 'aprovado'::post_status
            ELSE status
          END,
          updated_at = now()
      WHERE id = $1
      RETURNING id`,
-    [id, title, body, tags, imageUrl, scheduledAt],
+    [
+      id,
+      title,
+      body,
+      tags,
+      images[0]?.key ?? null,
+      images.map((image) => image.key),
+      images.map((image) => image.alt),
+      scheduledAt,
+    ],
   );
   if (updated.length === 0) throw new Error("Post não encontrado.");
+
+  const kept = new Set(images.map((image) => image.key));
+  const removed = imagePathsFromRow(existing).filter((path) => !kept.has(path));
+  await deletePostImageObjects(removed);
   revalidatePosts(id);
 }
 
@@ -232,12 +327,88 @@ export async function updatePostStatus(
   revalidatePosts(id);
 }
 
+export async function approvePost(id: string): Promise<void> {
+  validateId(id);
+  const [post] = await query<PostContentRow>(
+    `SELECT status, title, body, tags FROM posts WHERE id = $1`,
+    [id],
+  );
+  if (!post) throw new Error("Post não encontrado.");
+  if (post.status === "arquivado") {
+    throw new Error("Restaure o post antes de aprová-lo.");
+  }
+  if (post.status === "publicado" || post.status === "publicando") {
+    throw new Error("Posts publicados ou em publicação não podem ser aprovados.");
+  }
+  if (!post.title.trim() || !post.body.trim()) {
+    throw new Error("Preencha o título e o texto do post antes de aprovar.");
+  }
+  if (post.tags.length === 0) {
+    throw new Error("Adicione pelo menos uma tag antes de aprovar.");
+  }
+
+  const updated = await query<IdRow>(
+    `UPDATE posts
+     SET status = 'aprovado', scheduled_at = NULL, updated_at = now()
+     WHERE id = $1
+     RETURNING id`,
+    [id],
+  );
+  if (updated.length === 0) throw new Error("Post não encontrado.");
+  revalidatePosts(id);
+}
+
+export async function archivePost(id: string): Promise<void> {
+  validateId(id);
+  const [post] = await query<PostStatusRow>(
+    `SELECT status FROM posts WHERE id = $1`,
+    [id],
+  );
+  if (!post) throw new Error("Post não encontrado.");
+  if (post.status === "publicado") {
+    throw new Error("Posts publicados são imutáveis e não podem ser arquivados.");
+  }
+  if (post.status === "publicando") {
+    throw new Error("Aguarde a conclusão da publicação antes de arquivar.");
+  }
+
+  const updated = await query<IdRow>(
+    `UPDATE posts
+     SET status = 'arquivado', scheduled_at = NULL, updated_at = now()
+     WHERE id = $1
+     RETURNING id`,
+    [id],
+  );
+  if (updated.length === 0) throw new Error("Post não encontrado.");
+  revalidatePosts(id);
+}
+
+export async function restorePost(id: string): Promise<void> {
+  validateId(id);
+  const updated = await query<IdRow>(
+    `UPDATE posts
+     SET status = 'rascunho', scheduled_at = NULL, updated_at = now()
+     WHERE id = $1 AND status = 'arquivado'
+     RETURNING id`,
+    [id],
+  );
+  if (updated.length === 0) {
+    throw new Error("Post não encontrado ou fora da lista de arquivados.");
+  }
+  revalidatePosts(id);
+}
+
 export async function deletePost(id: string): Promise<void> {
   validateId(id);
+  const [existing] = await query<PostImagePathsRow>(
+    `SELECT image_path, image_paths FROM posts WHERE id = $1`,
+    [id],
+  );
   const deleted = await query<IdRow>(
     `DELETE FROM posts WHERE id = $1 RETURNING id`,
     [id],
   );
   if (deleted.length === 0) throw new Error("Post não encontrado.");
+  if (existing) await deletePostImageObjects(imagePathsFromRow(existing));
   revalidatePosts(id);
 }

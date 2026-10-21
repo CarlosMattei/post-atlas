@@ -19,6 +19,8 @@ export type Workflow =
 
 export type PostImage = {
   id: string;
+  /** Chave do objeto no bucket. Ausente em registros legados que guardavam URL. */
+  key?: string;
   url: string;
   alt: string;
 };

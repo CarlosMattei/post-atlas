@@ -83,6 +83,7 @@ function sameImages(current: PostImage[], saved: PostImage[]): boolean {
     current.every(
       (image, index) =>
         image.id === saved[index].id &&
+        image.key === saved[index].key &&
         image.url === saved[index].url &&
         image.alt === saved[index].alt,
     )

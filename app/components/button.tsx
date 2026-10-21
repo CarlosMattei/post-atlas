@@ -45,6 +45,7 @@ function buttonClassName(
     "inline-flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-ds font-medium leading-5 no-underline outline-none transition-colors",
     "data-[focus-visible]:outline-2 data-[focus-visible]:outline-offset-2 data-[focus-visible]:outline-ds-focus",
     "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
+    "data-[pending]:opacity-60",
     "disabled:cursor-not-allowed disabled:opacity-50",
     variantClasses[variant],
     sizeClasses[size],

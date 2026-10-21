@@ -12,6 +12,7 @@ import {
   selectClassName,
 } from "./ui";
 import { SearchIcon, SparklesIcon, TrendingUpIcon } from "./icons";
+import { TrendPostButton } from "./trend-post-button";
 import type { TrendItem, TrendStatus } from "@/app/lib/types";
 
 function isTrendStatus(value: string): value is TrendStatus {
@@ -134,11 +135,7 @@ export function TrendItemsList({ items }: { items: TrendItem[] }) {
                 key={item.id}
                 className="min-w-0"
               >
-                <Link
-                  href={`/tendencias/${item.id}`}
-                  aria-label={`Ver detalhes da tendência: ${item.title}`}
-                  className="flex h-full min-w-0 flex-col rounded-ds-lg border border-ds-line bg-ds-surface p-4 no-underline outline-none transition-colors hover:border-ds-focus/40 hover:bg-ds-surface-hover/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ds-focus"
-                >
+                <article className="relative flex h-full min-w-0 flex-col rounded-ds-lg border border-ds-line bg-ds-surface p-4 transition-colors hover:border-ds-focus/40 hover:bg-ds-surface-hover/40">
                   <div className="flex items-start justify-between gap-3">
                     <Badge tone={statusTones[item.status]}>
                       {statusLabels[item.status]}
@@ -146,7 +143,13 @@ export function TrendItemsList({ items }: { items: TrendItem[] }) {
                     <ScorePill score={item.score} />
                   </div>
                   <h2 className="mt-3 text-sm font-semibold leading-5 text-ds-text">
-                    {item.title}
+                    <Link
+                      href={`/tendencias/${item.id}`}
+                      aria-label={`Ver detalhes da tendência: ${item.title}`}
+                      className="rounded-ds outline-none after:absolute after:inset-0 after:content-[''] hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ds-focus"
+                    >
+                      {item.title}
+                    </Link>
                   </h2>
                   <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-4 text-xs text-ds-text-subtle">
                     <span className="truncate">
@@ -156,7 +159,10 @@ export function TrendItemsList({ items }: { items: TrendItem[] }) {
                       {formatCollectedDate(item.collectedOn)}
                     </time>
                   </div>
-                </Link>
+                  <div className="relative z-10 mt-3 border-t border-ds-line pt-3">
+                    <TrendPostButton trend={item} />
+                  </div>
+                </article>
               </li>
             ))}
           </ul>

@@ -17,6 +17,7 @@ import {
   type PublishStrategy,
 } from "@/app/lib/post-form";
 import type { Post, PostStatus } from "@/app/lib/types";
+import { uploadPostImage } from "@/app/lib/upload-image";
 
 export type FeedbackTone = "info" | "success" | "warning" | "danger";
 
@@ -74,6 +75,7 @@ export function usePostForm(post: Post) {
   const [feedback, setFeedback] = useState<PostFeedback | null>(null);
 
   const objectUrls = useRef<string[]>([]);
+  const pendingFiles = useRef(new Map<string, File>());
   const publishTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const dirty = isDirty(values, saved);
@@ -220,13 +222,17 @@ export function usePostForm(post: Post) {
 
     if (files.length === 0) return;
 
-    const valid = files.filter((file) => file.type.startsWith("image/"));
+    const valid = files.filter((file) =>
+      ["image/jpeg", "image/png", "image/webp", "image/gif"].includes(
+        file.type,
+      ),
+    );
 
     if (valid.length === 0) {
       notify(
         "danger",
         "Arquivo não suportado",
-        "Envie imagens em PNG, JPG ou WebP.",
+        "Envie imagens em PNG, JPG, WebP ou GIF.",
       );
       return;
     }
@@ -245,10 +251,12 @@ export function usePostForm(post: Post) {
     const accepted = valid.slice(0, remaining);
     const added = accepted.map((file) => {
       const url = URL.createObjectURL(file);
+      const id = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
       objectUrls.current.push(url);
+      pendingFiles.current.set(id, file);
 
       return {
-        id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        id,
         url,
         alt: file.name.replace(/\.[^.]+$/, ""),
       };
@@ -281,6 +289,7 @@ export function usePostForm(post: Post) {
     const target = values.images.find((image) => image.id === id);
 
     if (target) revokeObjectUrl(target.url);
+    pendingFiles.current.delete(id);
 
     setValues((current) => ({
       ...current,
@@ -352,16 +361,50 @@ export function usePostForm(post: Post) {
   }
 
   async function save(): Promise<boolean> {
-    if (values.images.some((image) => image.url.startsWith("blob:"))) {
-      notify(
-        "danger",
-        "Imagem não salva",
-        "O armazenamento de imagens ainda não está configurado. Remova a imagem local antes de salvar.",
-      );
-      return false;
-    }
+    let nextImages = values.images;
 
     try {
+      const pending = nextImages.filter((image) =>
+        image.url.startsWith("blob:"),
+      );
+
+      if (pending.length > 0) {
+        notify(
+          "info",
+          "Enviando imagens…",
+          `Enviando ${pending.length} ${
+            pending.length === 1 ? "imagem" : "imagens"
+          } para o bucket do Neon.`,
+        );
+
+        const uploaded = new Map<string, { key: string; url: string }>();
+
+        for (const image of pending) {
+          const file = pendingFiles.current.get(image.id);
+
+          if (!file) {
+            throw new Error(
+              "Uma das imagens não está mais disponível. Remova-a e selecione novamente.",
+            );
+          }
+
+          uploaded.set(image.id, await uploadPostImage(file));
+        }
+
+        nextImages = nextImages.map((image) => {
+          const result = uploaded.get(image.id);
+
+          if (!result) return image;
+
+          revokeObjectUrl(image.url);
+          pendingFiles.current.delete(image.id);
+
+          return { ...image, key: result.key, url: result.url };
+        });
+
+        setValues((current) => ({ ...current, images: nextImages }));
+      }
+
       const nextScheduledAt =
         status === "agendado" &&
         values.strategy === "fixo" &&
@@ -372,11 +415,14 @@ export function usePostForm(post: Post) {
         title: values.title,
         body: values.body,
         tags: values.tags,
-        imageUrl: values.images[0]?.url ?? null,
+        images: nextImages.map((image) => ({
+          key: image.key ?? image.url,
+          alt: image.alt,
+        })),
         scheduledAt: nextScheduledAt,
       });
       const now = new Date().toISOString();
-      setSaved(snapshotOf(values));
+      setSaved(snapshotOf({ ...values, images: nextImages }));
       setSavedAt(now);
       setUpdatedAt(now);
       if (status === "agendado" && !nextScheduledAt) {
@@ -388,7 +434,7 @@ export function usePostForm(post: Post) {
       notify(
         "success",
         "Alterações salvas",
-        "Título, texto, tags, imagem e agendamento foram atualizados no Neon.",
+        "Título, texto, tags, imagens e agendamento foram atualizados no Neon.",
       );
       return true;
     } catch (error) {
@@ -424,6 +470,7 @@ export function usePostForm(post: Post) {
         !saved.images.some((savedImage) => savedImage.url === image.url)
       ) {
         revokeObjectUrl(image.url);
+        pendingFiles.current.delete(image.id);
       }
     });
 
